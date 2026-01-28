@@ -12,8 +12,15 @@ Transcribe audio files (.m4a) to SRT format using OpenAI Whisper locally in Dock
 
 1. Place .m4a or .mp4 files in `audio-files/` directory.
 2. Run transcription:
+
+   **First time or after Dockerfile changes:**
    ```bash
-   docker compose up --build
+   DOCKER_BUILDKIT=1 docker compose up --build
+   ```
+
+   **Subsequent runs:**
+   ```bash
+   docker compose up
    ```
 
 3. SRT files will appear in `output/` directory.
