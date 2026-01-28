@@ -1,8 +1,6 @@
 services:
   whisperr-videos:
     build: .
-    profiles:
-      - gpu
     runtime: nvidia
     volumes:
       - ./models:/root/.cache/whisper

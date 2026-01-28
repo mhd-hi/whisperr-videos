@@ -1,0 +1,8 @@
+audio-files/
+output/
+models/
+README.md
+.git
+.gitignore
+.dockerignore
+*.md
