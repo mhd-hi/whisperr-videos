@@ -1,0 +1,11 @@
+services:
+  whisperr-videos:
+    build: .
+    profiles:
+      - gpu
+    runtime: nvidia
+    volumes:
+      - ./models:/root/.cache/whisper
+      - ./audio-files:/app/audio-files
+      - ./output:/app/output
+    command: /app/process_audio.sh

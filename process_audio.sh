@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Process all m4a files in audio-files directory
-
+# Process all m4a files in audio-files directory and output SRT files to output directory
 AUDIO_DIR="/app/audio-files"
 OUTPUT_DIR="/app/output"
 
