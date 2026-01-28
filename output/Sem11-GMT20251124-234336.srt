@@ -1,0 +1,3356 @@
+1
+00:00:00,000 --> 00:00:11,040
+base de données parallèles et réparties avant de commencer là je vais juste essayer de enfin
+
+2
+00:00:11,040 --> 00:00:19,980
+qu'on essaie de mesurer l'importance ou la pertinence de ce chapitre là je vais prendre
+
+3
+00:00:19,980 --> 00:00:34,860
+exemple sur que je vais apprendre ok imaginons il n'y a pas longtemps j'ai audité l'application
+
+4
+00:00:34,860 --> 00:00:40,560
+d'un start up là il n'y a pas longtemps il pense qu'il ya comme un mois de cela mais ils ont très
+
+5
+00:00:40,560 --> 00:00:45,600
+bonne idée je pense qu'ils vont aller loin avec ça donc c'est start up là je vais pas vous dit c'est
+
+6
+00:00:45,600 --> 00:00:53,940
+quoi parce que j'ai pas qu'ils voulaient l'idée là donc ce start up là ils sont en train de se faire
+
+7
+00:00:53,940 --> 00:01:04,080
+des clients montréal qu'ils ont un super projet là donc j'ai eu le mandat de les accompagner de
+
+8
+00:01:04,080 --> 00:01:11,160
+m'assurer que le produit qu'ils offrent se tient la route ok pour ne pas se faire casser la figure
+
+9
+00:01:11,160 --> 00:01:19,500
+plus tard donc je les accompagner donc admettons que ceux ils ont ils commencent à montréal j'ai
+
+10
+00:01:19,500 --> 00:01:29,820
+commencé à montréal imaginons que ce produit là ça la cote et donc à montréal ils ont les bases de
+
+11
+00:01:29,820 --> 00:01:37,080
+données là donc la base de l'état montréal donc ils ont de la cote ça commence à voir des clients et
+
+12
+00:01:37,080 --> 00:01:47,160
+tout et puis tout d'un coup il ya des clients qui commence à venir qui sont de québec et donc les
+
+13
+00:01:47,160 --> 00:01:56,820
+clients de québec vont se connecter à la base de données à montréal pour se faire servir on continue
+
+14
+00:01:56,820 --> 00:02:04,620
+on a de la cote on a des clients on est content il ya des clients qui viennent de gatineau donc à gatineau là
+
+15
+00:02:04,620 --> 00:02:14,700
+on a des clients qui arrive aussi pour se connecter à l'application à la base de données donc quand on
+
+16
+00:02:14,700 --> 00:02:19,320
+se connecte à l'application on va aller chercher des données dans la base de données là on continue
+
+17
+00:02:19,320 --> 00:02:23,880
+on commence à avoir des clients un peu partout c'est tellement populaire que j'ai confiance que
+
+18
+00:02:23,880 --> 00:02:32,500
+ce start up vont aller loin là ceux que j'ai édité et audité il ya un mois là ils vont aller très loin donc
+
+19
+00:02:32,500 --> 00:02:42,400
+admettons qu'on a des clients qui viennent de l'ontario et ça vient d'ontario ça vient de l'alberta
+
+20
+00:02:42,400 --> 00:02:54,340
+et ça vient de partout là donc tout le monde bien cherché de quoi à montréal pour se faire servir au
+
+21
+00:02:54,340 --> 00:03:03,040
+niveau de la base de données entre nous là si on on maintient les choses comme ça là c'est à dire que
+
+22
+00:03:03,040 --> 00:03:10,720
+les clients qui viennent de partout pour se connecter si on maintient les choses ainsi ça va être quoi le
+
+23
+00:03:10,720 --> 00:03:22,240
+problème un peu plus tard si on garde les choses comme ça là ça va être quoi le problème si on rajoute des
+
+24
+00:03:22,240 --> 00:03:29,740
+nouveaux emplacements oui c'est ça on devrait ajouter de nouveaux emplacements bonne idée mais si on
+
+25
+00:03:29,740 --> 00:03:34,060
+n'ajoute pas de nouveaux emplacements ça va être quoi le problème qu'est ce serait l'impact ou les
+
+26
+00:03:34,060 --> 00:03:36,060
+impacts s'il n'y a pas de nouveaux emplacements
+
+27
+00:03:36,060 --> 00:03:50,100
+pro de collection vu la même bédé merci michael exactement trop de connexions donc ça va créer trop
+
+28
+00:03:50,100 --> 00:03:58,680
+de connexions donc un moment donné on va ressentir de la lenteur ok le serveur va être surchargé là ok
+
+29
+00:03:58,680 --> 00:04:08,560
+donc problème de connexions je suis tout à fait d'accord donc font c'est je dirais c'est c'est pas
+
+30
+00:04:08,560 --> 00:04:15,520
+mal ça quand même le serveur va être trop surchargé ok trop de demandes donc si à trop de demandes là
+
+31
+00:04:15,520 --> 00:04:25,180
+ça va ça va ça va faire tomber le serveur là ok dans ce qu'on observe là bon on va rentrer dans
+
+32
+00:04:25,180 --> 00:04:30,580
+les solutions techniques là mais souvent et c'est pas si vous avez vu enfin si vous voyez là en fait
+
+33
+00:04:30,580 --> 00:04:36,820
+il faut pas ça c'est quelque chose qui n'a rien à voir avec ce qu'on va dire là mais lorsque vous
+
+34
+00:04:36,820 --> 00:04:45,820
+voulez mettre sur le marché une application il ne faut jamais jamais exposer l'application directe
+
+35
+00:04:45,820 --> 00:04:53,620
+comme ça là sur internet ou exposer l'application directe comme ça à vos clients c'est à dire que
+
+36
+00:04:53,620 --> 00:05:00,160
+oublions la base de données là ok je vais de façon générale il faut jamais faire ça ici on a
+
+37
+00:05:00,160 --> 00:05:03,760
+plusieurs personnes qui accèdent à la base de données c'est vrai ça va causer des accords de
+
+38
+00:05:03,760 --> 00:05:09,280
+façon générale vous avez une application que vous voulez mettre sur le marché ou que vous
+
+39
+00:05:09,280 --> 00:05:15,640
+voulez mettre en production ça dépend de la sensibilité du projet parce qu'il y a des projets
+
+40
+00:05:15,640 --> 00:05:23,400
+qui sont trop sensibles donc ces projets qui sont trop sensibles là on ne va pas exposer
+
+41
+00:05:23,620 --> 00:05:27,160
+ces applications là comme ça c'est très dangereux
+
+42
+00:05:27,160 --> 00:05:35,160
+j'ai enfin je sais pas si j'ai le droit de dire mais j'ai j'ai trouvé un cas comme ça là il n'y a pas trop longtemps
+
+43
+00:05:35,160 --> 00:05:39,760
+où je pense que c'était un accident peut-être ils ne savaient pas trop là mais en tout cas
+
+44
+00:05:39,760 --> 00:05:51,300
+il y avait en fait bon c'était c'était quand même c'est pas bien passé là ça dit que ils ont qu'est ce qu'ils ont fait
+
+45
+00:05:51,300 --> 00:05:55,300
+cette entreprise là qu'est ce qu'ils ont fait ça dit qu'ils avaient deux types de clients
+
+46
+00:05:55,300 --> 00:06:04,740
+et ce qui s'est passé c'est qu'il y avait un premier type de clients qui était il y avait quand même un certain
+
+47
+00:06:04,740 --> 00:06:08,740
+filtre là où les clients ne devaient pas passer à travers qu'ils avaient mis des filtres un peu
+
+48
+00:06:08,740 --> 00:06:17,220
+pour essayer de les calmer en cas de d'insistance mais il y avait un autre type de clients que eux autres là
+
+49
+00:06:17,220 --> 00:06:24,680
+ils pensaient que ces clients étaient des clients de confiance donc ces clients qui étaient de confiance là
+
+50
+00:06:24,680 --> 00:06:30,440
+qu'est ce qu'ils ont fait ils n'ont pas mis des filtres donc ces clients de confiance là
+
+51
+00:06:30,440 --> 00:06:38,340
+pouvaient accéder à leur système directement sans passer par des intermédiaires mais c'était mal de les connaître
+
+52
+00:06:38,340 --> 00:06:46,140
+parmi ces clients là du coup ils ont commencé à avoir des problèmes des problèmes de fraude par ci par là
+
+53
+00:06:46,140 --> 00:06:53,820
+mais ils ne savaient pas trop pourquoi donc ils m'ont fait appel donc je suis arrivé donc là j'ai essayé d'évaluer
+
+54
+00:06:53,820 --> 00:07:00,780
+enfin j'ai vu ça rapidement parce que d'un côté vous avez des clients vous dites que vous ne leur faites pas confiance
+
+55
+00:07:00,780 --> 00:07:09,420
+donc du coup vous mettez de l'autre balanceur ou des serveurs des firewalls ou des qu'on appelle ça des reverse proxy compagnie
+
+56
+00:07:09,420 --> 00:07:15,960
+mais de l'autre côté vous dites non non ceux là sont nos clients de confiance on n'a pas à se casser la tête pour
+
+57
+00:07:15,960 --> 00:07:23,580
+mettre des barrières avant d'atteindre le système donc on va voilà mais là je pense qu'ils ont appris les leçons là
+
+58
+00:07:23,580 --> 00:07:28,500
+pour jamais faire confiance à qui que ce soit peu importe que tu aies confiance ou pas il faut mettre de
+
+59
+00:07:28,500 --> 00:07:32,820
+quoi pour ne pas qu'ils atteignent votre système directement donc en général il faut pas exposer un
+
+60
+00:07:32,820 --> 00:07:38,220
+système comme ça directement il faut soit mettre on va mettre l'autre balanceur soin des produits tout
+
+61
+00:07:38,220 --> 00:07:42,540
+en eux là c'est de voir il ya des produits qui sont l'autre balanceur qui sont des waf qui font
+
+62
+00:07:42,540 --> 00:07:50,880
+tout donc il faut mettre des des intermédiaires entre votre application et les clients qui vont les
+
+63
+00:07:50,880 --> 00:07:57,780
+appeler ok pour vous protéger donc en revanche dans notre cas ici j'avais bien parallèle ça je fais
+
+64
+00:07:57,780 --> 00:08:05,880
+un détour là donc il faut pas faire ça il faut éviter de de faire une congestion pour éviter que tout le
+
+65
+00:08:05,880 --> 00:08:14,220
+monde puisse appeler la même base de données imaginez par exemple c'est pas moi imaginez amazon
+
+66
+00:08:14,220 --> 00:08:21,660
+pour amazon ont fait les achats là imaginez avoir amazon avec une seule base de données dans le monde
+
+67
+00:08:21,660 --> 00:08:28,320
+mais ça aucun sens ça marchera pas là et ils ont ils ont qu'on appelle ça des ils ont ce qu'on appelle
+
+68
+00:08:28,320 --> 00:08:35,520
+des régions ils ont des régions donc parfois quand tu t'abonnes tu peux choisir une de tes régions si tu as
+
+69
+00:08:35,520 --> 00:08:42,540
+à montréal tu vas choisir par exemple une localisation qui est pas loin de montréal histoire de te rapprocher
+
+70
+00:08:42,540 --> 00:08:51,000
+au service d'enfants ok donc si je faisais cela c'était grave là il ya même de si vous allez dans
+
+71
+00:08:51,000 --> 00:08:59,820
+les vidéos qui font du streaming là les youtube et compagnie là les youtube et compagnie ils n'ont pas
+
+72
+00:08:59,820 --> 00:09:09,840
+un serveur centralisé s'ils faisaient ça c'était fou ils ont ils ont ils ont qu'on appelle ça des je
+
+73
+00:09:09,840 --> 00:09:13,740
+sais même pas si je dois le dire là mais bon bref je vais laisser ça parce que je sais pas ce que je suis
+
+74
+00:09:13,740 --> 00:09:19,080
+dans le dis ou pas mais pour moi c'est pas les serveurs centralisés ils ont des serveurs un peu
+
+75
+00:09:19,080 --> 00:09:26,280
+de part et d'autre là et quand vous voulez regarder une plus vidéo mais c'est ce serveur à vous contacter
+
+76
+00:09:26,280 --> 00:09:33,900
+et c'est ce serveur vous sert au plus ils font du ils font du qu'on appelle ça du multicast ils font du
+
+77
+00:09:33,900 --> 00:09:39,900
+multicast que s'ils n'ont pas changé parce que j'avais regardé c'est un mois doré là ils font du multicast donc
+
+78
+00:09:39,900 --> 00:09:47,040
+si moi je veux regarder une vidéo ils vont mettre un délai de visionnement c'est à dire que souvent ils vont
+
+79
+00:09:47,040 --> 00:09:53,160
+faire passer la publicité et entre temps ils vont collecter les personnes qui veulent regarder la
+
+80
+00:09:53,160 --> 00:10:00,420
+même vidéo ok donc après cela il va voir du multicast en fait donc par exemple moi et puis olivier nous
+
+81
+00:10:00,420 --> 00:10:05,860
+deux ça nous intéresse de regarder une certaine vidéo donc ils vont faire quoi cette vidéo là au lieu
+
+82
+00:10:05,860 --> 00:10:12,420
+d'envoyer les flux vidéo des personnes individuelles ils vont envoyer les flux vidéo à olivier et moi en même
+
+83
+00:10:12,420 --> 00:10:21,480
+temps qui fait du multicast on revient au cours bas de données parallèles et réparties donc quand
+
+84
+00:10:21,480 --> 00:10:27,960
+on parle pas de données réparties les données se trouvent sur plusieurs sites et les données se
+
+85
+00:10:27,960 --> 00:10:33,660
+trouvent sur plusieurs sites donc on a plusieurs sections plusieurs plusieurs lieux et à chaque lieu
+
+86
+00:10:33,660 --> 00:10:37,500
+on va mettre des données un peu comme ce qu'on a vu tout à l'heure là il y avait québec avec
+
+87
+00:10:37,500 --> 00:10:48,180
+gatineau ontario tout ça donc sur chaque site là on va mettre des données ok avec l'arrivée de
+
+88
+00:10:48,180 --> 00:10:54,480
+trompe là c'est pas si vous avez suivi là mais avec l'arrivée de trompe il ya eu avec toutes les
+
+89
+00:10:54,480 --> 00:11:03,600
+menaces là les entreprises ou même certains gouvernements qui avaient des données qui étaient aux
+
+90
+00:11:03,600 --> 00:11:08,880
+états unis ces entreprises là avec les menaces parce que vous savez on sait jamais qu'est ce que
+
+91
+00:11:08,880 --> 00:11:13,200
+trompe va faire demain matin c'est si ça lui plaît pas bon ok je bloque toutes les données puis on va
+
+92
+00:11:13,200 --> 00:11:18,720
+faire quoi c'est la première puissance mondiale on va faire quoi donc les entreprises ont commencé à
+
+93
+00:11:18,720 --> 00:11:23,280
+délocaliser leurs données ils ont commencé à prendre les données qui étaient sur les sites
+
+94
+00:11:23,280 --> 00:11:31,560
+américains et à les envoyer sur des sites qui sont dans leur pays donc du coup je sais pas si
+
+95
+00:11:31,560 --> 00:11:39,960
+les azur et autres aws là je sais pas s'ils ont dû expressionement aller mettre des serveurs dans
+
+96
+00:11:39,960 --> 00:11:45,780
+d'autres pays là mais au canada il y en a je pense qu'il ya ils ont quand je prends aws je pense qu'ils
+
+97
+00:11:45,780 --> 00:11:51,900
+ont un site à à québec au québec ici je pense je sais pas c'est quelle ville mais il y en a pas si c'est
+
+98
+00:11:51,900 --> 00:11:57,720
+en fait ça m'échappe là mais ils ont ils ont un site à au québec ici et puis j'ai un autre je sais
+
+99
+00:11:57,720 --> 00:12:02,640
+pas si c'est en ontario là mais en tout cas ils ont des sites ici au canada et vous allez trouver les
+
+100
+00:12:02,640 --> 00:12:08,940
+mêmes sites en france et aux compagnies donc les gens ils ont tout rapatrié et puis maintenant et là
+
+101
+00:12:08,940 --> 00:12:16,680
+si les données sont dans certains pays très souvent la réglementation du pays va s'appliquer
+
+102
+00:12:16,680 --> 00:12:22,920
+qui est la réglementation du pays va s'appliquer à ces données là donc du coup on protège les
+
+103
+00:12:22,920 --> 00:12:29,520
+données qui sont sur notre site à nous ok donc on va envoyer les données sur plusieurs sites chaque
+
+104
+00:12:29,520 --> 00:12:36,720
+site possède un degré un certain degré d'autonomie ok donc ça dit que si j'envoie des données à montréal
+
+105
+00:12:36,720 --> 00:12:44,580
+j'ai le site de montréal à un certain degré d'autonomie ok les bases de données parallèles de
+
+106
+00:12:44,580 --> 00:12:49,140
+quoi on parle donc on parle des bases de données parallèles ça exploite le parallèle à l'intérieur
+
+107
+00:12:49,140 --> 00:12:55,620
+d'un même site donc on va pas nous envers la fin on va plus ce qu'on est sur un site à l'intérieur
+
+108
+00:12:55,620 --> 00:13:02,400
+d'un site ça dit que quoi c'est que quand on parle des sites là c'est un serveur qui est installé
+
+109
+00:13:02,400 --> 00:13:11,760
+à un endroit précis ok donc à cet endroit précis là on peut faire du parallélisme on a un serveur on
+
+110
+00:13:11,760 --> 00:13:19,500
+exécute une requête la requête va être exécuté des façons parallèles c'est à dire que on a plus
+
+111
+00:13:19,500 --> 00:13:29,100
+des disques et on va diviser la requête et on envoie l'exécution parallèle et les requêtes
+
+112
+00:13:29,100 --> 00:13:34,320
+parallèles entre sites aussi c'est possible mais c'est un peu plus compliqué mais c'est possible aussi
+
+113
+00:13:34,320 --> 00:13:46,980
+donc ça c'est pour mettre la différence entre les deux donc bazar des parties donc ici qu'est-ce
+
+114
+00:13:46,980 --> 00:13:57,180
+qu'on qu'est-ce qu'on essaie de faire là ça dit que on a un client ici et on a un client ici et se
+
+115
+00:13:57,180 --> 00:14:03,420
+connecte à une base de données c'est à dire que ça soit c'est une application là et cette application
+
+116
+00:14:03,420 --> 00:14:11,100
+va se connecter à une base de données cette base de données à laquelle l'application va se connecter
+
+117
+00:14:11,100 --> 00:14:16,320
+directement c'est votre base de données locale donc quand on va à une base de données locale c'est
+
+118
+00:14:16,320 --> 00:14:24,180
+lorsque vous êtes un client et que votre application vous connecte à la base de données la plus proche
+
+119
+00:14:24,180 --> 00:14:30,540
+donc c'est votre base de données qui est locale ok donc si je me connecte à ma base de données locale
+
+120
+00:14:30,540 --> 00:14:39,300
+étant donné qu'on est dans un contexte réparti c'est vrai que les sites que donc on parle des sites
+
+121
+00:14:39,300 --> 00:14:45,840
+c'est un endroit géographique où est-ce qu'on a installé une base de données ok donc c'est vrai
+
+122
+00:14:45,840 --> 00:14:53,400
+que chaque site est autonome c'est vrai chaque baie de local chaque base de données locale est autonome
+
+123
+00:14:53,400 --> 00:14:59,040
+mais n'empêche que ces bases de données peuvent communiquer ça peut arriver on va en parler tout
+
+124
+00:14:59,040 --> 00:15:04,140
+à l'heure là ça peut arriver que les bases de données se parlent que pour s'échanger des
+
+125
+00:15:04,140 --> 00:15:09,480
+informations que ça arrive donc en arrière ce qu'on ne sait pas c'est qu'en arrière il y a tout
+
+126
+00:15:09,480 --> 00:15:16,860
+un ensemble de serveurs qui vont collaborer pour servir les clients c'est vrai que chaque site est
+
+127
+00:15:16,860 --> 00:15:21,660
+autonome c'est vrai mais ça arrive que dans certaines situations les serveurs doivent se
+
+128
+00:15:21,660 --> 00:15:32,340
+parler pour être sûrs de se synchroniser là ok on dit ici doivent communiquer pour servir la requête
+
+129
+00:15:32,340 --> 00:15:37,680
+et donc ça arrive parfois où ces sites n'ont pas le choix que de se parler pour servir la requête je
+
+130
+00:15:37,680 --> 00:15:43,680
+prends un exemple rapidement là pour ne pas vous laisser dans le flou supposons que je suis une
+
+131
+00:15:43,680 --> 00:15:54,120
+banque ok une banque xyz cette banque xyz là a beaucoup de succursale admettons que cette banque
+
+132
+00:15:54,120 --> 00:16:03,640
+là a un site à montréal un site c'est pas moi à edmonton donc si je fais un retrait à montréal c'est vrai que
+
+133
+00:16:03,640 --> 00:16:08,500
+c'est des sites différents là c'est les bases différentes mais c'est fait un retrait à montréal
+
+134
+00:16:08,500 --> 00:16:16,960
+là mais il faut que je joue j'envoie l'information au site qui en alberta pour lui faire comprendre que
+
+135
+00:16:16,960 --> 00:16:23,680
+il ya eu un changement selon qu'est-ce qui va se passer si je fais je ne fais rien mais je vais faire
+
+136
+00:16:23,680 --> 00:16:33,400
+un retrait ici et le même retrait je vais le faire à en alberta en edmonton ouais donc les sites doivent
+
+137
+00:16:33,400 --> 00:16:39,340
+se parler dans certaines situations pour être sûrs que on va pas on va pas on va pas manquer
+
+138
+00:16:39,340 --> 00:16:45,400
+quelque chose mais pour les requêtes dql les sélect par exemple mais c'est complètement autonome ok
+
+139
+00:16:45,400 --> 00:16:50,980
+donc j'ai fait une requête ainsi de données et les résultats j'ai pas besoin d'aller contacter les
+
+140
+00:16:50,980 --> 00:16:55,180
+autres mais pour certaines opérations comme les retrait comme j'ai dit c'est donc c'est le cas
+
+141
+00:16:55,180 --> 00:16:59,680
+des modifications il faut qu'on s'assure que on soit synchrone en tout le monde pour ne pas que
+
+142
+00:16:59,680 --> 00:17:10,060
+il est un problème ok donc ce n'est d'un contexte répartitaires qu'on a plusieurs sites qu'est ce
+
+143
+00:17:10,060 --> 00:17:16,060
+qu'on a un certain performance ok il ya la performance qui vient avec parce que si comme
+
+144
+00:17:16,060 --> 00:17:22,360
+on l'a dit tout à l'heure là pour les start up dont j'ai parlé tout à l'heure si ce start up là doit
+
+145
+00:17:22,360 --> 00:17:30,360
+servir des clients qui sont en chine ou au japon ok mais quitter le japon c'est vrai que c'est
+
+146
+00:17:30,360 --> 00:17:34,540
+rapide là c'est vrai mais quand même le délai pourrait se faire sentir à un moment donné donc
+
+147
+00:17:34,540 --> 00:17:41,920
+tant qu'à y être on va installer un site au japon pour que les clients qui sont au japon lorsqu'ils
+
+148
+00:17:41,920 --> 00:17:47,020
+vont se connecter là mais ça va être un peu plus rapide donc le coût des transferts est réduit en
+
+149
+00:17:47,020 --> 00:17:53,980
+rapprochant les données de leur traitement vous voyez donc les clients qui sont au japon on va
+
+150
+00:17:53,980 --> 00:17:59,560
+regrouper on va rapprocher les données aux clients qui sont au japon c'est le japon qui est le lieu de
+
+151
+00:17:59,560 --> 00:18:10,900
+traitement parallèle en site entre les cidons c'est pas c'est pas aussi évident ok mais quand même c'est
+
+152
+00:18:10,900 --> 00:18:18,880
+possible ça peut arriver dans certaines circonstances où ça dit qu'on a une requête à exécuter on veut pas
+
+153
+00:18:18,880 --> 00:18:26,380
+que ce soit un seul site qui exécute cette requête là donc qu'est ce qu'on va faire on va demander à
+
+154
+00:18:26,380 --> 00:18:34,060
+un certain site de nous aider donc il ya un autre site qui va exécuter une partie de la requête et vous
+
+155
+00:18:34,060 --> 00:18:39,880
+vous exécuter une autre partie on va rassembler les résultats ce genre de ces gens de choses là
+
+156
+00:18:39,880 --> 00:18:47,380
+c'est pas évident mais dans certains circonstances on n'a pas le choix donc si admettons que c'est pas
+
+157
+00:18:47,380 --> 00:18:56,380
+moi admettons que on a on va en parler après si on a des données qui sont qui sont différentes
+
+158
+00:18:56,380 --> 00:19:01,480
+ça veut dire que les données qui sont à toronto sont pas les mêmes données qui sont à montréal vous
+
+159
+00:19:01,480 --> 00:19:06,400
+allez me dire mais pourquoi ça peut arriver qu'on peut décider de faire la répartition en insérant des
+
+160
+00:19:06,400 --> 00:19:10,960
+données qui sont différentes un peu partout donc dans ce cas là par exemple on n'a pas le choix si
+
+161
+00:19:10,960 --> 00:19:17,980
+j'ai un client de montréal qui se déplace dans une autre ville et que je fais un retrait qu'est ce qui
+
+162
+00:19:17,980 --> 00:19:25,600
+va se passer mais il faut que je contacte montréal pour que l'opération s'efface ou bien je pose une
+
+163
+00:19:25,600 --> 00:19:31,480
+action qui va impliquer le site de c'est pas moi de de toronto et puis le site de montréal donc il va y
+
+164
+00:19:31,480 --> 00:19:35,200
+avoir un certain parallélisme là il ya une partie de la requête qui se met à montréal une autre partie
+
+165
+00:19:35,200 --> 00:19:39,820
+qui reste à toronto et les deux vont exécuter en parallèle et donc ça peut arriver on va parler
+
+166
+00:19:39,820 --> 00:19:45,460
+après fiabilité disponibilité en cas de panne les autres sites peuvent assurer la disponibilité des
+
+167
+00:19:45,460 --> 00:19:51,700
+données donc et donc d'un contexte réparti ça peut arriver que encore une fois ça peut arriver que
+
+168
+00:19:51,700 --> 00:19:58,060
+on est on est les mêmes données partout ok ce qu'on a à montréal c'est exactement ce qu'on a à toronto
+
+169
+00:19:58,060 --> 00:20:03,520
+donc ce n'est ce que nous sommes dans ce cas de figure bien cette infiabilité disponibilité qui vient
+
+170
+00:20:03,520 --> 00:20:09,580
+avec dessus les sites de montréal tombe mais les autres peuvent prendre la relève parce que ce sont les mêmes
+
+171
+00:20:09,580 --> 00:20:18,520
+données l'extensibilité donc on a la possibilité de faire de l'extension et on a pu détendre notre
+
+172
+00:20:18,520 --> 00:20:26,680
+notre base de données c'est que si il ya un serveur qui est sous chargé là on ne va pas lui donner tout
+
+173
+00:20:26,680 --> 00:20:31,180
+temps de la capacité ou bien on ne peut pas tout en train d'échanger les serveurs donc qu'est ce qu'on
+
+174
+00:20:31,180 --> 00:20:39,400
+va faire on va créer un autre site je prends un exemple montréal est sous chargé et on constate
+
+175
+00:20:39,400 --> 00:20:47,560
+que la plupart des personnes qui se connectent sur le site de montréal proviennent de sherbrooke par
+
+176
+00:20:47,560 --> 00:20:54,460
+raison ok donc on a les clients de montréal mais le deuxième lot des clients qui a de l'importance
+
+177
+00:20:54,460 --> 00:20:59,980
+ce sont les clients qui sont à sherbrooke donc qu'est ce qu'on fait mais on va aller installer un
+
+178
+00:20:59,980 --> 00:21:07,180
+site à sherbrooke pour que les clients de sherbrooke puissent communiquer avec le serveur qui est à sherbrooke
+
+179
+00:21:07,180 --> 00:21:13,720
+là bas et on va éviter par exemple de chercher à remplacer les serveurs de montréal parce que
+
+180
+00:21:13,720 --> 00:21:20,680
+c'est une certaine capacité limite ben on peut pas continuer à chercher des limites là il n'y a pas
+
+181
+00:21:20,680 --> 00:21:25,300
+un ordinateur qui est super puissant à vie là c'est à un moment donné il faut trouver une solution
+
+182
+00:21:25,300 --> 00:21:36,340
+qui va être flexible et étendre votre réseau de cette façon la complexité donc c'est que tout ça ça
+
+183
+00:21:36,340 --> 00:21:44,620
+se fait pas comme ça ça vient avec certains défis par exemple transparence de la répartition les
+
+184
+00:21:44,620 --> 00:21:48,880
+applications ne doit pas se soucier du fait que les données sont répartis sur plusieurs sites par exemple
+
+185
+00:21:48,880 --> 00:21:55,640
+donc une application qui s'adresse à une base de données je m'en fous de savoir que c'est un système
+
+186
+00:21:55,640 --> 00:22:03,100
+réparti là je m'adresse à un seul endroit je souhaite être servi là c'est tout les nœuds peuvent avoir des
+
+187
+00:22:03,100 --> 00:22:07,600
+schémas différents et je veux les différents donc ça peut arriver que certains sites donc quand on parle
+
+188
+00:22:07,600 --> 00:22:13,600
+des sites on parle des nœuds c'est la même chose donc les nœuds peuvent être différents et donc comment gérer
+
+189
+00:22:13,600 --> 00:22:23,800
+cette différence là ça prend souvent une certaine capacité à pouvoir communiquer avec un autre système
+
+190
+00:22:23,800 --> 00:22:30,280
+qui est complètement différent ok on est dans un contexte hétérogène donc quand c'est comme ça là
+
+191
+00:22:30,280 --> 00:22:37,180
+il faut qu'on soit capable de communiquer avec les autres répartition des dictionnaires de données
+
+192
+00:22:37,180 --> 00:22:42,400
+afin de savoir où trouver les informations sur les tables donc il faut qu'on s'assure que tous les
+
+193
+00:22:42,400 --> 00:22:47,020
+sites ont toutes les informations nécessaires pour savoir où se trouve certains colonnes c'est un
+
+194
+00:22:47,020 --> 00:22:55,300
+table à un moment donné gestion des transactions répartis donc nous ce qu'on a vu quand on parle
+
+195
+00:22:55,300 --> 00:23:02,440
+des gestion des transactions là ce qu'on a vu c'est lorsque on était avec un seul site c'est-à-dire que
+
+196
+00:23:02,440 --> 00:23:10,240
+on est à l'intérieur d'un seul serveur donc si on est à l'intérieur d'un seul serveur on a appris
+
+197
+00:23:10,240 --> 00:23:16,900
+les bonnes façons pour gérer les transactions on va faire du verrouillage estampillage et tout ça
+
+198
+00:23:16,900 --> 00:23:25,420
+on l'a vu mais là on rentre dans un contexte qui est réparti donc du coup notre serveur dans lequel on
+
+199
+00:23:25,420 --> 00:23:32,140
+gérer les transactions avec les techniques qu'on a vu mais là il faut prendre en considération les
+
+200
+00:23:32,140 --> 00:23:39,860
+autres serveurs là on change la donne donc il faut s'assurer que tout ce qu'on fait on est capable de pouvoir
+
+201
+00:23:39,860 --> 00:23:43,520
+répliquer ces changements là sur les autres sites donc il faut maintenir les propriétés d'atomicité
+
+202
+00:23:43,520 --> 00:23:50,900
+d'isolation et de durabilité des transactions sur l'ensemble des nœuds ok dans cette c'est bien
+
+203
+00:23:50,900 --> 00:23:57,740
+encore plus compliqué imaginez une banque qui fait pas ça une banque qui fait pas ça là mais là
+
+204
+00:23:57,740 --> 00:24:06,740
+c'est pas bon là ok c'est pas une bonne idée il faut s'assurer que l'isolation est vraiment respectée
+
+205
+00:24:06,740 --> 00:24:11,960
+peu importe où on se trouve si j'ai fait un retrait à montréal mais il faudrait que si quelqu'un fait
+
+206
+00:24:11,960 --> 00:24:19,640
+la même transaction sur mon compte à l'autre bout du monde mais cette personne va attendre on ne peut
+
+207
+00:24:19,640 --> 00:24:27,260
+pas être deux en train de on ne peut pas être deux en train de défaire une transaction sur le même
+
+208
+00:24:27,260 --> 00:24:32,400
+compte mais si on a su des sites différents parce que si ça avait été possible là ce serait incohérent
+
+209
+00:24:32,400 --> 00:24:42,780
+ok évaluation des requêtes donc ici puisqu'on est dans un contexte réparti là là il ya un autre
+
+210
+00:24:42,780 --> 00:24:50,460
+facteur qui rentre en ligne de jeu c'est le facteur ou le transfert de données ok je prends un exemple
+
+211
+00:24:50,460 --> 00:24:57,480
+j'ai le j'ai un site j'ai un site un ainsi deux incite
+
+212
+00:24:57,480 --> 00:25:04,280
+3 quand il parle de site c'est le nu est là où est ce qu'on va installer des serveurs de base de
+
+213
+00:25:04,280 --> 00:25:11,400
+données donc moi là j'ai besoin d'une certaine données ok j'ai besoin par exemple des données qui
+
+214
+00:25:11,400 --> 00:25:18,540
+se trouvent pas dans le site 3 et que ces données là il y en a dans le site 1 il y en a dans le site 2
+
+215
+00:25:18,540 --> 00:25:25,200
+donc cette donnée dont j'ai besoin est là est-ce que je vais m'adresser au site 1 ou bien je vais
+
+216
+00:25:25,200 --> 00:25:31,200
+m'adresser au site 2 question là où ça va faire la différence là c'est au niveau du coût des
+
+217
+00:25:31,200 --> 00:25:41,820
+transferts ok donc si ça va coûter moins cher pour aller sur le site 1 j'irai là ou si ça va coûter
+
+218
+00:25:41,820 --> 00:25:46,800
+moins cher pour aller sur les sites 2 j'irai là aussi ne regardez pas la distance c'est une erreur
+
+219
+00:25:46,800 --> 00:25:58,320
+donc si j'ai deux sites même le site qui se trouve à 5 km de moins peut ne pas être performant que le
+
+220
+00:25:58,320 --> 00:26:06,760
+site qui est à 20 km de moins tout dépend du coût de transfert sur la bande passante parce que imaginez par
+
+221
+00:26:06,760 --> 00:26:13,780
+exemple c'est pas moi parfois quand vous prenez votre gps là parfois vous allez voir quand vous
+
+222
+00:26:13,780 --> 00:26:21,580
+regardez les options souvent prendre des routes qui sont longues ça prend moins de temps que
+
+223
+00:26:21,580 --> 00:26:26,740
+prendre les routes qui sont courtes parfois ça arrive vous pouvez faire l'expérience parfois
+
+224
+00:26:26,740 --> 00:26:32,620
+tu vois ça dit mais ça passe mais c'est vrai ça marche parce que même si vous prenez le chemin qui
+
+225
+00:26:32,620 --> 00:26:39,220
+est long mais si c'est sur autoroute et qu'il n'y a pas de congestion vous avez vite arrivé que la
+
+226
+00:26:39,220 --> 00:26:45,800
+personne qui a pris un chemin qui est court mais qui est un chemin normal qui fait partie des chemins
+
+227
+00:26:45,800 --> 00:26:52,360
+des rues là c'est pas l'autoroute vous allez perdre du temps donc il faut se fier sur le coup de transfert
+
+228
+00:26:52,360 --> 00:26:57,400
+de données c'est-à-dire que combien de temps ça va prendre pour envoyer les données du site 1 au site 2 et
+
+229
+00:26:57,400 --> 00:27:08,260
+3 ok donc ça c'est un facteur qui rentre en ligne de jeu pour pouvoir nous faire son titre d'affaires
+
+230
+00:27:08,260 --> 00:27:14,200
+donc on va rentrer dans les architectures et par exemple quels sont les types d'architecture qu'on peut
+
+231
+00:27:14,200 --> 00:27:23,920
+avoir donc on a les sgbt reparti homogène multi sgbt et sgbt fédéré donc qu'est ce qu'on a ici pour les
+
+232
+00:27:23,920 --> 00:27:30,220
+cas homogènes donc on a des sites qui sont à des lieux différents on peut trouver dans une situation
+
+233
+00:27:30,220 --> 00:27:41,920
+où chaque site utilise la même technologie et le même schéma ok donc si on a ça c'est parfait c'est
+
+234
+00:27:41,920 --> 00:27:48,400
+comme si en termes de en fait de communication entre les deux sites là on va bien sûr qu'on passe et c'est
+
+235
+00:27:48,400 --> 00:27:54,820
+le même langage c'est la même base de données qui est de par et d'autres donc c'est plus facile ok et
+
+236
+00:27:54,820 --> 00:28:02,680
+puis là c'est réparti là on va on parle de c'est pas si je peux vous en parler mais parce que je pense
+
+237
+00:28:02,680 --> 00:28:10,180
+qu'il ya un lien avec ça lorsque vous avez des ça c'est les serveurs complètement différent donc on a un
+
+238
+00:28:10,180 --> 00:28:26,740
+serveur ça ça peut ça peut être un serveur à ce va ici serveur b ok je fais juste une parenthèse et
+
+239
+00:28:26,740 --> 00:28:34,360
+lorsque vous avez plusieurs si vous avez des serveurs que vous voulez utiliser qu'ils font à peu près le
+
+240
+00:28:34,360 --> 00:28:42,820
+même travail il ya le type de fonctionnement actif actif qu'ils ont pas des fonctionnements actifs
+
+241
+00:28:42,820 --> 00:28:53,120
+actifs savez de quoi quand on parle des tirs des fonctionnements actifs actifs c'est que les deux sites
+
+242
+00:28:53,120 --> 00:29:02,000
+là sont utilisés ok les deux sont actifs les deux servent les clients il ya aussi des mots de fonctionnement
+
+243
+00:29:02,000 --> 00:29:14,480
+actifs actifs passifs et ça savait du quoi actif passif c'est pas dans le coup un passé je pense
+
+244
+00:29:14,480 --> 00:29:25,100
+que c'est un lien avec cela actif passif c'est que bien un site qui sert les clients et puis l'autre
+
+245
+00:29:25,100 --> 00:29:33,980
+il ne sert pas les clients mais il est là au cas où ok au cas où le actif tombe lui il prend la relève
+
+246
+00:29:33,980 --> 00:29:41,480
+donc on parle des serveurs de relève ok donc parfois vous allez attendre par les actifs actifs actifs passifs
+
+247
+00:29:41,480 --> 00:29:53,960
+ok donc dans ce dans ici le poule sgbd homogène les schémas sont pareils la technologie est pareille donc on a un plus
+
+248
+00:29:53,960 --> 00:30:00,360
+grand fiabilité performant dû à un meilleur couplage entre les sites et donc il ya un meilleur couplage ça fait que ça
+
+249
+00:30:00,360 --> 00:30:11,000
+rend les choses moins compliquées sinon il ya un autre type que j'aime pas trop qui est le multi lgbt donc qu'est-ce qu'on fait ici c'est à dire que
+
+250
+00:30:11,000 --> 00:30:23,600
+on va l'application est chargé de se connecter à des sites différents donc on a deux sites ici donc site 1
+
+251
+00:30:23,600 --> 00:30:33,500
+site 2 qui qui servent les requêtes donc qu'est ce qu'on va faire on va essayer de dire aux applications
+
+252
+00:30:33,500 --> 00:30:40,220
+ça vous de vous connecter sur les différents sites pour aller chercher vos données ça c'est pas une bonne
+
+253
+00:30:40,220 --> 00:30:46,640
+idée parce que on ne veut pas ça devient complique c'est complexe à gérer là comme on l'a comme le
+
+254
+00:30:46,640 --> 00:30:53,000
+voit dans la slide c'est complète à gérer c'est complexe à gérer parce que si on a 50 bases de
+
+255
+00:30:53,000 --> 00:31:01,100
+données on va devoir gérer 50 et 50 identifiants c'est compliqué là 50 identifiants à gérer là ça
+
+256
+00:31:01,100 --> 00:31:06,200
+c'est compliqué et là aussi elle est il ya les requêtes ad hoc qui viennent avec donc les requêtes
+
+257
+00:31:06,200 --> 00:31:12,320
+ad hoc là c'est à dire que on va demander l'application d'exécuter des requêtes selon les
+
+258
+00:31:12,320 --> 00:31:17,960
+bases de données donc il ya plus de requêtes ad hoc qui vont arriver qu'on voudrait éviter donc ça
+
+259
+00:31:17,960 --> 00:31:24,920
+c'est possible mais bon c'est pas quelque chose qui est enfin que moi je recommanderais personnellement là
+
+260
+00:31:24,920 --> 00:31:33,140
+sinon ça c'est le sgbd fédéré ça c'est beaucoup utilisé c'est à dire que on a plusieurs bases de
+
+261
+00:31:33,140 --> 00:31:41,360
+données ok et ses bases de données là on va les virtualiser ok on va les virtualiser afin qu'on
+
+262
+00:31:41,360 --> 00:31:48,440
+s'adresse à un seul point d'entrée ok donc ça c'est des choses qui se font on va utiliser des produits
+
+263
+00:31:48,440 --> 00:31:57,020
+comme ibm ibm ibm et ibm fédération c'est ça ibm fédération il ya oracle aussi qui fait ça aura
+
+264
+00:31:57,020 --> 00:32:02,300
+gateway donc aura gateway c'est un autre produit aussi qui permet de faire ça donc on va utiliser
+
+265
+00:32:02,300 --> 00:32:09,380
+ces produits là qu'ils vont qu'ils vont et qu'ils vont comme est incorporé les autres bases qui sont
+
+266
+00:32:09,380 --> 00:32:15,320
+en arrière et donc on va les lier donc que vous si vous voulez vous aller chercher des données vous vous
+
+267
+00:32:15,320 --> 00:32:21,980
+êtes dressé à un seul point d'entrée qui est l'outil vous faites la fédération et cet outil en
+
+268
+00:32:21,980 --> 00:32:28,580
+arrière va splitter votre requête à plusieurs autres requêtes qui sont en arrière ok donc ça
+
+269
+00:32:28,580 --> 00:32:33,740
+c'est facile ça nous permet de nous connecter à un seul endroit donc une seule interface d'accès
+
+270
+00:32:33,740 --> 00:32:41,400
+commune ce qu'on dit ici interface d'accès commune pour masquer l'hétérogénéité des bases et la
+
+271
+00:32:41,400 --> 00:32:50,180
+répartition des données et pour le protocole en deux phases va revenir là-dessus qui va revenir là-dessus
+
+272
+00:32:50,180 --> 00:32:58,260
+donc pas de l'effet de consolation des données après la fusion des compétences ça peut arriver
+
+273
+00:32:58,260 --> 00:33:06,440
+quand il ya une certaine fusion inconvénient bon tout n'est pas forcément beau à 100% intégration du
+
+274
+00:33:06,440 --> 00:33:11,960
+schéma possiblement difficile par exemple des vues doivent être refaites au cas où il en existerait
+
+275
+00:33:11,960 --> 00:33:20,180
+déjà ok donc c'est à dire que d'un fond ce qui s'est passé que si on y va avec une architecte
+
+276
+00:33:20,180 --> 00:33:27,860
+fédérée parfois n'a pas le choix comme j'ai dit on veut pas laisser l'application gérer les accès à
+
+277
+00:33:27,860 --> 00:33:34,220
+plusieurs bases de données on veut pas ça c'est compliqué donc on virtualise pour nous faciliter
+
+278
+00:33:34,220 --> 00:33:42,140
+l'accès ok donc même si on fait ça il ya quand même des inconvénients qui est que ben c'est comme
+
+279
+00:33:42,140 --> 00:33:49,460
+c'est pas comment vous dire que vous adressez au point d'entrée et selon ce que vous voulez les
+
+280
+00:33:49,460 --> 00:33:55,520
+requêtes sont réinterprétées et à cheminer à d'autres bases de données en arrière c'est comme
+
+281
+00:33:55,520 --> 00:33:59,840
+s'il ya une certaine réécriture des requêtes qui se fait après et cette réécriture des requêtes
+
+282
+00:33:59,840 --> 00:34:06,260
+qui se fait après pas comme créer un niveau de complexité qui peut causer un impact sur la
+
+283
+00:34:06,260 --> 00:34:12,980
+performance ok donc je te demande quelque chose et toi tu transforme ma demande et tu tu fais la
+
+284
+00:34:12,980 --> 00:34:18,620
+demande vers un autre serveur ok donc c'est comme on est intermédiaire ça peut causer un certain délai
+
+285
+00:34:18,620 --> 00:34:30,860
+donc ça c'est désigné le produit là ma cité des schémas donc si vous prenez ces produits commerciaux
+
+286
+00:34:30,860 --> 00:34:37,760
+là pour faire de vous faites de vous faire pour créer une base de données réparties ce que ça fait
+
+287
+00:34:37,760 --> 00:34:45,060
+c'est que ça va vous donner plusieurs niveaux d'information d'abord pour les applications
+
+288
+00:34:45,060 --> 00:34:52,620
+pour les applications on s'en fout c'est comme si on s'adresse à une seule entité c'est pour
+
+289
+00:34:52,620 --> 00:35:00,560
+l'application ben on dit à ta client il ya ta produit à ta fournisseur c'est ce qu'on sait mais la
+
+290
+00:35:00,560 --> 00:35:04,820
+complexité qui est en arrière là pour savoir que c'est on est dans un système réparti là
+
+291
+00:35:04,820 --> 00:35:12,600
+mais l'application s'en fout donc l'application ici dans un acheter comme ça dans un contexte réparti
+
+292
+00:35:12,600 --> 00:35:20,160
+on a un accès au schéma externe c'est à dire que c'est externe parce que les détails là on ne sait pas
+
+293
+00:35:20,160 --> 00:35:24,840
+parce que tu sais tu demandes avoir la liste des clients mais est-ce qu'on sait où se trouvent les
+
+294
+00:35:24,840 --> 00:35:31,020
+clients on ne sait pas donc nous on a accès à une vue externe de tout ce qui existe comme données
+
+295
+00:35:31,020 --> 00:35:36,660
+ok donc on a un schéma externe qui donne les informations des tables on ne sait pas où ça se trouve
+
+296
+00:35:36,660 --> 00:35:45,960
+schéma concepteur global ensuite va être consulté dans le but d'identifier où se trouvent ces données
+
+297
+00:35:45,960 --> 00:35:52,020
+là donc au schéma concepteur global c'est là où on va se rendre compte que non attention quand on
+
+298
+00:35:52,020 --> 00:35:58,800
+parle des tables clients là ben ça se trouve sur un certain site ok table fournisseur se trouve ailleurs
+
+299
+00:35:58,800 --> 00:36:07,360
+ailleurs donc comment aller atteindre ces données là on va se servir du schéma de localisation et le
+
+300
+00:36:07,360 --> 00:36:16,560
+schéma de localisation va nous dire bon ok table clients se trouve à montréal voici ces informations il faut
+
+301
+00:36:16,560 --> 00:36:22,800
+que tu ailles là-bas pour te connecter ok donc c'est le schéma de localisation qui va nous aider au final pour aller
+
+302
+00:36:22,800 --> 00:36:31,260
+aller vers les données et vers le site concerné mais avant ça le schéma concepteur global c'est où se
+
+303
+00:36:31,260 --> 00:36:36,900
+trouvent les données mais comment s'ils rendent là sur le schéma de localisation qui va nous aider dans ce sens
+
+304
+00:36:36,900 --> 00:36:37,980
+là après
+
+305
+00:36:37,980 --> 00:36:52,800
+duplication ok on arrive tranquillement là donc comme je l'ai dit on est dans un contexte répartie donc quand
+
+306
+00:36:52,800 --> 00:36:58,140
+on est un contexte répartie là on a dit quoi ça peut nous ça peut on peut aller chercher certaines
+
+307
+00:36:58,140 --> 00:37:02,640
+disponibilités c'est-à-dire qu'il ya cette infiabilité qu'on peut aller chercher donc cette fiabilité là
+
+308
+00:37:02,640 --> 00:37:09,240
+c'est à dire que le fait d'avoir des données disponibles en cas de panne d'un site donné mais
+
+309
+00:37:09,240 --> 00:37:14,100
+ça c'est possible à cause de la duplication donc qu'est ce que la duplication nous nous propose la
+
+310
+00:37:14,100 --> 00:37:20,880
+duplication nous propose par exemple de copier les données au complet par exemple j'ai table client
+
+311
+00:37:20,880 --> 00:37:28,020
+montréal les données qui sont dans la table client montréal vont être copiées au complet sur les
+
+312
+00:37:28,020 --> 00:37:35,760
+autres sites dont on parle de duplication qu'on va dupliquer les données donc si on fait cette
+
+313
+00:37:35,760 --> 00:37:44,160
+duplication là on a plusieurs sites il ya le site qu'elle le site maître qu'est il faut un master à
+
+314
+00:37:44,160 --> 00:37:49,380
+quelque part là donc on est on a une table maîtresse d'admettable client la table maîtresse se trouve dans
+
+315
+00:37:49,380 --> 00:37:54,340
+un site donné et on a les autres sites donc on va avoir une copie de local par exemple au site 2
+
+316
+00:37:54,340 --> 00:38:04,120
+et une autre copie local au site 3 ok et entre les différents sites la relation peut être bidirectionnelle
+
+317
+00:38:04,120 --> 00:38:15,100
+ou unidirectionnelle ça veut dire quoi non c'est unidirectionnel si je suis connecté au site 3 que la
+
+318
+00:38:15,100 --> 00:38:23,000
+relation est unidirectionnelle si je fais un insert là que je cherche à faire une modification la
+
+319
+00:38:23,000 --> 00:38:29,900
+modification ne va pas fonctionner ok on n'est pas capable de faire une modification et puis ça va
+
+320
+00:38:29,900 --> 00:38:35,480
+remonter sur les autres ça marchera pas parce que c'est unidirectionnel mais quand c'est bidirectionnel
+
+321
+00:38:35,480 --> 00:38:45,080
+si je modifie ici par exemple certaines informations la modification va remonter la table maîtresse va être
+
+322
+00:38:45,080 --> 00:38:51,000
+au courant et ensuite ça va être propagé sur le site 3 où est-ce qu'on a cette copie locale dans une
+
+323
+00:38:51,000 --> 00:38:57,840
+duplication en fait ok donc ça c'est une façon de faire quand on est dans un contexte répartite on
+
+324
+00:38:57,840 --> 00:39:02,640
+duplique carrément donc ici qu'est-ce qu'on en a accès plus rapide aux données qu'à moins des
+
+325
+00:39:02,640 --> 00:39:09,540
+transferts donc il ya une certaine copie des données sur plusieurs sites donc du coup ça devient plus rapide
+
+326
+00:39:09,540 --> 00:39:19,160
+donc on économise sur quoi sur le coût de transfert ok la redondance a su la disponibilité donc sur les sites
+
+327
+00:39:19,160 --> 00:39:24,140
+sur les différents sites on a une certaine duplication donc s'il ya de la duplication on
+
+328
+00:39:24,140 --> 00:39:31,460
+améliore quoi on améliore quoi la disponibilité des données ok sur les sites 3 tom il n'y a pas de
+
+329
+00:39:31,460 --> 00:39:37,280
+problème on peut se connecter sur les sites 2 que parfois il ya des protocoles comme ça il ya des
+
+330
+00:39:37,280 --> 00:39:43,280
+applications qui sont codés comme ça que on essaye si on voit qu'on n'est pas capable de communiquer
+
+331
+00:39:43,280 --> 00:39:51,140
+avec un certain site on sait vers où se revirer de bord elle permet de contrôler l'accès en limitant
+
+332
+00:39:51,140 --> 00:39:55,460
+les données distantes qui sont accessibles localement on peut contrôler les données
+
+333
+00:39:55,460 --> 00:40:01,760
+distantes qu'on aimerait rendre disponibles localement sur un serveur donc ici comme on
+
+334
+00:40:01,760 --> 00:40:07,040
+l'a vu il ya la relation qui est bidirectionnelle puis à l'autre qui était unidirectionnelle donc cette
+
+335
+00:40:07,040 --> 00:40:14,420
+façon de faire la duplication nous permet aussi des décès c'est un contrôle d'accès c'est admettons
+
+336
+00:40:14,420 --> 00:40:21,620
+que je sais que si c'est un site je pense que il ya de fortes chances qu'il ya de la fraude par
+
+337
+00:40:21,620 --> 00:40:26,540
+exemple mais ça va être unidirectionnelle donc les gens vont pas pouvoir s'amuser à faire des
+
+338
+00:40:26,540 --> 00:40:32,600
+modifications qui vont remonter vers la table maîtresse on va créer certaines limitations la
+
+339
+00:40:32,600 --> 00:40:36,140
+synchronisation entre la table maîtresse et ça copie le cas peut être synchrone ou asynchrone
+
+340
+00:40:36,140 --> 00:40:40,460
+donc si on décide d'être synchrone c'est à dire que s'il ya un changement tout le monde va être
+
+341
+00:40:40,460 --> 00:40:44,360
+courant en même temps mais si c'est asynchrone on n'est pas pressé s'il ya un changement qui
+
+342
+00:40:44,360 --> 00:40:48,500
+se passe quelque part puisque c'est des façons asynchrone les autres vont être au courant après
+
+343
+00:40:48,500 --> 00:40:55,040
+bon ça dépend de la nature de vos activités donc si on a des activités qui sont assez critiques
+
+344
+00:40:55,040 --> 00:41:00,200
+il faut que ça soit synchrone si c'est pas critique ça peut être asynchrone donc duplication
+
+345
+00:41:00,200 --> 00:41:15,980
+et que je fais un retrait sur le site 1 il faut que tout le monde soit au courant même moment une
+
+346
+00:41:15,980 --> 00:41:22,040
+transaction est confirmée seulement lorsque tous les sites ont été mis à jour donc si je fais un
+
+347
+00:41:22,040 --> 00:41:31,340
+retrait tant que les autres sites ne sont pas à jour la transaction n'est pas confirmé ok donc
+
+348
+00:41:31,340 --> 00:41:36,140
+parfois vous allez attendre devant le guichet vous attendez en arrière mais ils sont en train de mettre
+
+349
+00:41:36,140 --> 00:41:41,780
+les autres sites à jour en fait donc quand tout ça serait complété là on vous remet votre agent et
+
+350
+00:41:41,780 --> 00:41:47,180
+vous étiez votre agent duplication en synchrone les mises à jour sont d'avoir fait une copie primaire
+
+351
+00:41:47,180 --> 00:41:53,300
+les sites de réplication sont mis à jour en différé à partir de la copie primaire après la confirmation
+
+352
+00:41:53,300 --> 00:42:00,980
+de la transaction donc ici la duplication synchrone on n'est pas pressé donc on peut la copie primaire
+
+353
+00:42:00,980 --> 00:42:06,320
+elle est mise à jour et après la mise à jour va se propager sur les autres sites qu'on a parce que
+
+354
+00:42:06,320 --> 00:42:13,640
+nous sommes à synchrone ok donc on va prendre la pause maintenant il est 25 quand on va arriver
+
+355
+00:42:13,640 --> 00:42:18,320
+mais on va continuer avec la fragmentation répartie donc on se retrouve dans 15 minutes
+
+356
+00:42:25,880 --> 00:42:26,420
+ok
+
+357
+00:42:26,420 --> 00:42:30,140
+ok
+
+358
+00:42:30,140 --> 00:42:42,980
+donc on était rendu aux différents types de on est dans un contexte réparti là donc on était rendu à la
+
+359
+00:42:42,980 --> 00:42:50,780
+section où est ce que on essaie de voir comment est ce que on peut d'un site à l'autre comment est
+
+360
+00:42:50,780 --> 00:42:57,020
+ce qu'on peut envoyer des données donc il ya la duplication comme je l'ai dit qui consiste à faire
+
+361
+00:42:57,020 --> 00:43:02,780
+des copies intégrales des données sur différents sites donc il ya la duplication secours en secours
+
+362
+00:43:02,780 --> 00:43:08,120
+comme on a expliqué synchrone on s'assure que tous les nœuds sont même niveau d'information avant de
+
+363
+00:43:08,120 --> 00:43:14,660
+confirmer c'est une transaction d'asynchrone on a la copie maîtresse ou la copie primaire qui est
+
+364
+00:43:14,660 --> 00:43:19,820
+informé d'une certaine modification et plus tard les aussi soit mis à va être mis à jour de façon
+
+365
+00:43:19,820 --> 00:43:28,100
+différée à côté de la duplication une autre technique qui permet de faire des copies des données donc dans
+
+366
+00:43:28,100 --> 00:43:34,820
+un contexte réparti c'est la fragmentation ok la fragmentation ça consiste à faire quoi c'est
+
+367
+00:43:34,820 --> 00:43:41,120
+que on va pas copier toutes les données on va pas faire ça contrairement à la duplication la
+
+368
+00:43:41,120 --> 00:43:45,140
+fragmentation fait pas cela donc qu'est ce que la fragmentation va faire la fragmentation va
+
+369
+00:43:45,140 --> 00:43:51,920
+copier un sous ensemble de données ok un sous ensemble de données donc ce que ça fait c'est que
+
+370
+00:43:51,920 --> 00:44:00,920
+on va enfin vous allez voir c'est quand même assez intéressant c'est que on va envoyer à des sites
+
+371
+00:44:00,920 --> 00:44:08,720
+les données qui sont nécessaires mais pas toutes les données ok vous allez voir il y a la fragmentation
+
+372
+00:44:08,720 --> 00:44:15,660
+horizontale et à ce qu'on appelle la fragmentation vertical ça consiste à quoi donc quand on parle de
+
+373
+00:44:15,660 --> 00:44:24,380
+fragmentation horizontale c'est à dire que on prend un ensemble des lignes comme ici par exemple on a une deux
+
+374
+00:44:24,380 --> 00:44:32,300
+trois quatre cinq six lignes donc on va prendre quatre lignes qu'on peut envoyer ça à montréal et puis les
+
+375
+00:44:32,300 --> 00:44:37,820
+autres les deux lignes là on les envoie ailleurs et donc un ensemble des lignes qu'on envoie c'est
+
+376
+00:44:37,820 --> 00:44:44,240
+à dire qu'on va subdiviser les données par ligne ok on envoie un ensemble des lignes sur un site un autre
+
+377
+00:44:44,240 --> 00:44:50,060
+ensemble sur un autre site donc ça c'est vraiment quand même assez intéressant parce que ce qui s'est passé
+
+378
+00:44:50,060 --> 00:44:58,060
+quoi c'est que c'est que si admettons que je suis une entreprise internationale ok j'ai beaucoup de
+
+379
+00:44:58,060 --> 00:45:06,080
+clients à travers le monde donc si j'ai des clients à montréal dans ce que je peux faire c'est que au
+
+380
+00:45:06,080 --> 00:45:12,860
+niveau de montréal donc montréal c'est youl ok ça c'est au niveau de l'aviation un canton de youl là
+
+381
+00:45:12,860 --> 00:45:21,860
+c'est l'aéroport de montréal et donc je vais dans la base de données de montréal je vais mettre
+
+382
+00:45:21,860 --> 00:45:28,980
+seulement les données des clients de montréal donc tout ça c'est montréal ça j'envoie ça où j'envoie
+
+383
+00:45:28,980 --> 00:45:35,420
+ça sur ce site de montréal donc ce qui va faire que on n'aura pas toutes les données on aura seulement
+
+384
+00:45:35,420 --> 00:45:45,140
+les données qui sont nécessaires pour servir les clients de montréal et là c'est quand même pas
+
+385
+00:45:45,140 --> 00:45:51,440
+mal efficace parce que si admettons que j'ai besoin par exemple d'aller chercher une certaine
+
+386
+00:45:51,440 --> 00:45:56,360
+information en ce qui est en ce qui est un rapport avec les données de montréal mais c'est moins de
+
+387
+00:45:56,360 --> 00:46:02,840
+blocs là aller chercher parce qu'on a comme retiré les lignes qui sont pas pertinentes pour le site de
+
+388
+00:46:02,840 --> 00:46:10,220
+montréal ok donc on va chaque fragment contient un sous-ensemble des lignes et on va les rapprocher
+
+389
+00:46:10,220 --> 00:46:16,760
+d'eux en fait de l'air de les clients les données sont rapprochées à leurs clients ou face pour que
+
+390
+00:46:16,760 --> 00:46:23,340
+les on aille c'est une certaine performance mais par contre ce qui va arriver c'est quoi c'est que les
+
+391
+00:46:23,340 --> 00:46:30,080
+clients parfois voyagent et les clients voyagent et ça peut arriver que un client de toronto se trouve
+
+392
+00:46:30,080 --> 00:46:40,520
+à montréal là on fait quoi ce qui se passe c'est que il ya deux cas ça dit que on peut on peut de
+
+393
+00:46:40,520 --> 00:46:46,940
+façon temporaire ça se passe comme ça dans la téléphonie parce que dans la téléphonie là parfois
+
+394
+00:46:46,940 --> 00:46:53,960
+on va on va trouver que dans cette suite dans cette base de données là on va trouver que vous n'êtes
+
+395
+00:46:53,960 --> 00:46:59,960
+pas souvent au niveau des zones régionales habituelles donc du coup on va aller pouvoir
+
+396
+00:46:59,960 --> 00:47:06,740
+faire la signalisation et tout on va contacter le site dont il est originaire pour comme leur
+
+397
+00:47:06,740 --> 00:47:11,120
+faire comprendre que tu es dans une certaine zone géographique là on sait où tu te trouves donc
+
+398
+00:47:11,120 --> 00:47:16,820
+tes informations seront temporairement copiées à un certain site et on sait où tu te trouves et là quand
+
+399
+00:47:16,820 --> 00:47:20,960
+il ya une certaine signalisation on sait où diriger l'appel parce qu'il ya une base de données
+
+400
+00:47:20,960 --> 00:47:26,720
+quelque part c'est vrai que c'est pas ta zone géographique mais de façon temporaire on sait
+
+401
+00:47:26,720 --> 00:47:31,580
+dans quelle base de données tu te trouves par rapport à certaines régions et là on va pouvoir
+
+402
+00:47:31,580 --> 00:47:36,440
+te rejoindre pour t'appeler ok donc souvent ça peut arriver de façon temporaire comme pour cet
+
+403
+00:47:36,440 --> 00:47:43,640
+exemple là on peut couper les données de façon temporaire ou sinon on peut demander les autres sites
+
+404
+00:47:43,640 --> 00:47:49,820
+ok j'ai un client ici il n'est pas dans ma base de données mais il est il vient d'où donc on va comme
+
+405
+00:47:49,820 --> 00:47:53,960
+aller interroger cette base de données là qui va pouvoir nous répondre pour nous fournir les informations
+
+406
+00:47:53,960 --> 00:48:06,740
+fragmentation verticale la fragmentation verticale cette fois ci on va pas faire le copier parler mais
+
+407
+00:48:06,740 --> 00:48:13,700
+là on va faire le copier de façon par colonne ok donc par exemple si on est une grande multinationale
+
+408
+00:48:13,700 --> 00:48:23,000
+est en un grand une grande entreprise on opère partout à travers le monde alors que si admettons
+
+409
+00:48:23,000 --> 00:48:31,580
+que le département de comptabilité se trouve et c'est pas moi à toronto c'est une très grande entreprise
+
+410
+00:48:31,580 --> 00:48:42,680
+internationale là donc à toronto se trouve le département de la comptabilité ok si toronto là-bas
+
+411
+00:48:42,680 --> 00:48:49,580
+c'est seulement le département de la comptabilité pour son point c'est un table est ce que c'est
+
+412
+00:48:49,580 --> 00:48:54,500
+toutes les colonnes qui sont nécessaires peut-être pas forcément peut-être pour un client mais pour
+
+413
+00:48:54,500 --> 00:49:00,500
+c'est pas moi pour les clients on aura besoin peut-être pas forcément de son numéro de téléphone
+
+414
+00:49:00,500 --> 00:49:06,060
+mais peut-être son nom son prénom son numéro d'assurance sociale peut-être c'est tout on n'a pas besoin de
+
+415
+00:49:06,060 --> 00:49:12,540
+l'appeler on n'a pas besoin de donc on va comme aller chercher les colonnes qui sont pertinentes et
+
+416
+00:49:12,540 --> 00:49:19,740
+on va les envoyer à un certain site ok donc ces colonnes est pour un certain site mais pas pour
+
+417
+00:49:19,740 --> 00:49:26,400
+tous les sites donc c'est ça la la fragmentation verticale donc ça vraiment contient un sous ensemble
+
+418
+00:49:26,400 --> 00:49:33,320
+de colonnes que l'autre c'est pour la fragmentation horizontale c'est un sous ensemble de ligne ici c'est un
+
+419
+00:49:33,320 --> 00:49:42,260
+sous ensemble de colonnes et donc les autres mais c'est moins utilisé quand même parce que c'est comme
+
+420
+00:49:42,260 --> 00:49:47,540
+ça on ne dit pas que ça n'existe pas mais ça existe quand même a fait c'est quand même la pardon donc
+
+421
+00:49:47,540 --> 00:49:53,480
+sinon on appelle ce qu'on pourrait on pourrait voir dans certains endroits mais c'est quand même assez rare
+
+422
+00:49:53,480 --> 00:50:07,220
+donc comme on l'a dit on est dans un contexte de partie là ok donc ce n'est dans un contexte de
+
+423
+00:50:07,220 --> 00:50:13,340
+partie remettons que nous sommes synchrones c'est qu'on a une duplication synchrone donc si la duplication
+
+424
+00:50:13,340 --> 00:50:22,280
+est synchrone ça veut dire que il faut que tous les sites sont au même niveau d'information faut que
+
+425
+00:50:22,280 --> 00:50:30,320
+tous les sites confirme la transaction avant de confirmer la transaction est primaire c'est que
+
+426
+00:50:30,320 --> 00:50:38,160
+là où est ce que de là où est ce que la transaction est partie et donc ici comment ça se passe admettons
+
+427
+00:50:38,160 --> 00:50:48,620
+que on a un site coordonnateur que ça c'est montréal la mtl montréal il ya un client qui envoie une
+
+428
+00:50:48,620 --> 00:50:57,440
+requête ici donc on envoie la requête mais on est dans une duplication synchrone dans ce n'est
+
+429
+00:50:57,440 --> 00:51:06,500
+d'un duplication synchrone le site coordonnateur va contacter les sites participants donc admettons
+
+430
+00:51:06,500 --> 00:51:13,780
+qu'on va faire et très haut on va contacter les sites participent pour pouvoir collaborer pour la
+
+431
+00:51:13,780 --> 00:51:20,440
+transaction donc chacun doit exécuter une certaine opération parce que c'est synchrone on n'a pas le
+
+432
+00:51:20,440 --> 00:51:25,240
+choix c'est un retrait des 500 dollars il faut que ça apparaît partout peu importe le site peu importe
+
+433
+00:51:25,240 --> 00:51:34,600
+le dieu pour que ça apparaît donc le site coordonnateur qui est le site par lequel la transaction est arrivé
+
+434
+00:51:34,600 --> 00:51:45,700
+va coordonner le tout au moins à travers ce qu'on appelle une transaction et protocole de communication
+
+435
+00:51:45,700 --> 00:51:51,760
+en deux phases pour tout procès de confiance en deux phases pardon donc le protocole de confirmation
+
+436
+00:51:51,760 --> 00:51:59,440
+en deux phases permet ainsi de coordonnateur de pouvoir gérer la transaction comme on a dit il faut
+
+437
+00:51:59,440 --> 00:52:04,660
+que les données soient intègres faut que les données soient cohérentes donc s'il ya un problème au niveau
+
+438
+00:52:04,660 --> 00:52:10,300
+de la gestion des transactions on aurait un problème de cohérence des données comme on a vu avec le coup
+
+439
+00:52:10,300 --> 00:52:16,900
+sur la gestion des transactions là juste avant l'intra là et on en a parlé donc ici on est dans un contexte
+
+440
+00:52:16,900 --> 00:52:26,620
+où on a plusieurs bases de données à mettre à jour de façon parallèle pour ne pas qu'on se trouve
+
+441
+00:52:26,620 --> 00:52:33,400
+d'un d'un site à l'autre avec des données qui ne font aucun sens donc qu'est ce qui se passe avec le
+
+442
+00:52:33,400 --> 00:52:41,600
+protocole de confirmation en deux phases ce qui va se passer c'est quoi c'est que le site par où la
+
+443
+00:52:41,600 --> 00:52:47,380
+transaction est admettons que je retire un montant à montréal ici donc le site de morale va être le site
+
+444
+00:52:47,380 --> 00:52:54,760
+coordonnateur donc qu'est ce qu'on va faire dans un premier temps où on est dans la confirmation je
+
+445
+00:52:54,760 --> 00:53:01,300
+dis bien on est dans la confirmation on s'assure que tout le monde est correct pour les changements
+
+446
+00:53:01,300 --> 00:53:10,000
+qu'on doit faire tout le monde tous ensemble donc on va demander à la phase 1 on va voter c'est à dire
+
+447
+00:53:10,000 --> 00:53:18,580
+qu'on va demander à tous les sites est ce que ça s'est bien passé ok donc chacun va répondre oui j'ai
+
+448
+00:53:18,580 --> 00:53:26,080
+réussi à compléter ce que tu m'as demandé donc on va attendre à ce que tout le monde répond donc s'il
+
+449
+00:53:26,080 --> 00:53:34,300
+y a un seul qui répond de façon négative on va dire à tout le monde d'annuler dans la deuxième phase
+
+450
+00:53:34,300 --> 00:53:43,840
+donc la première fois c'est pour voter la première phase là on va sonder les sites participants ok donc
+
+451
+00:53:43,840 --> 00:53:48,700
+tous les autres sites où est ce que la transaction n'a pas n'a pas commencé là sont les sites participants
+
+452
+00:53:48,700 --> 00:53:55,000
+donc ils vont voter si tout le monde répond de façon positive donc qu'est ce qu'on va faire on va
+
+453
+00:53:55,000 --> 00:53:59,740
+demander à tout le monde c'est bon vous pouvez confirmer ce que vous avez fait comme changement
+
+454
+00:53:59,740 --> 00:54:08,500
+donc le comité est en attente ok à ce qu'on reçoit du site coordonnateur la confirmation en fait que
+
+455
+00:54:08,500 --> 00:54:14,860
+tout le monde est correct donc si un seul c'est à dire que si un seul site qui n'a pas été capable de
+
+456
+00:54:14,860 --> 00:54:20,620
+se mettre à jour on va dire à tout le monde sur cette branche là on va demander à tout le monde
+
+457
+00:54:20,620 --> 00:54:29,560
+d'annuler ok on demande à tout le monde et tout le monde va annuler ce qu'on a fait et on va aviser
+
+458
+00:54:29,560 --> 00:54:37,240
+et on va aviser le le site coordonnateur qu'on a bien fait l'annulation ici on a on confie qu'on annule
+
+459
+00:54:37,240 --> 00:54:43,540
+on dit qu'on a annulé sinon si tout le monde vote et qu'on sait que ça s'est passé bien chez
+
+460
+00:54:43,540 --> 00:54:49,660
+tout le monde là on va envoyer dans la deuxième phase au site que c'est beau tout le monde est
+
+461
+00:54:49,660 --> 00:54:55,240
+d'accord vous pouvez confirmer chacun à son niveau ok là tout le monde c'est tout le monde confie la
+
+462
+00:54:55,240 --> 00:55:01,180
+modification et on va rester tout synchrone on va garder les données cohérentes un peu partout
+
+463
+00:55:01,180 --> 00:55:09,880
+pendant ce temps là si ça cible les données d'un client c'est c'est donner la reste verrouillée
+
+464
+00:55:09,880 --> 00:55:15,160
+pendant pendant ce protocole là tant qu'on n'a pas terminé avec les deux phases c'est à dire que la
+
+465
+00:55:15,160 --> 00:55:20,480
+première phase la phase de vote et la deuxième phase la confirmation d'annulation ou de confirmation
+
+466
+00:55:20,480 --> 00:55:28,640
+les ressources restent verrouillées donc ça dit que si moi j'ai pas une transaction comme ça là si j'ai
+
+467
+00:55:28,640 --> 00:55:33,980
+pas fini il n'y a pas quelqu'un d'autre vous pouvez faire l'expérience si vous voulez c'est à dire que vous
+
+468
+00:55:33,980 --> 00:55:38,060
+avez deux guichets des banques vous donnez un guichet à une personne qui se met à l'autre bout de
+
+469
+00:55:38,060 --> 00:55:42,560
+montréal là ou bien qui se met quelque part un peu loin et puis essayer de faire un retrait en parallèle
+
+470
+00:55:42,560 --> 00:55:49,400
+vous pense pas que vous serez capable la première personne qui arrive à déclencher la transaction là
+
+471
+00:55:49,400 --> 00:55:51,820
+va faire de lui et l'autre dans le fond
+
+472
+00:55:56,960 --> 00:56:03,680
+donc c'est un peu ce que je disais tantôt là le protocole est vrai en deux phases la demande de
+
+473
+00:56:03,680 --> 00:56:08,940
+confirmation ou en vente et on envoie la confirmation au cas où tout s'est bien passé sinon on demande à
+
+474
+00:56:08,940 --> 00:56:14,460
+tout le monde d'annuler ce qu'on a fait au niveau de l'optimisation qu'est ce qu'on peut dire donc on
+
+475
+00:56:14,460 --> 00:56:20,220
+a vu la transaction au niveau de l'optimisation qu'est ce qu'on peut dire si nous sommes au niveau
+
+476
+00:56:20,220 --> 00:56:29,760
+local comme on l'a dit pour l'optimisation on l'a vu au niveau local au niveau local on a dit quoi on va
+
+477
+00:56:29,760 --> 00:56:38,280
+regarder il faut avoir les certains certains index ok pour optimiser les indices à être que c'est parfait
+
+478
+00:56:38,280 --> 00:56:44,580
+mais pour optimiser là on va se baser sur les juristiques et puis les statistiques on a vu ça
+
+479
+00:56:44,580 --> 00:56:53,220
+déjà donc les deux sont comme complémentaires ok donc les deux sont complémentaires si on a les
+
+480
+00:56:53,220 --> 00:56:58,680
+juristiques sans les statistiques n'est pas une bonne idée si on a les statistiques et qu'on n'a pas
+
+481
+00:56:58,680 --> 00:57:04,620
+les juristiques on sait pas par où commencer pour optimiser ok donc les deux sont complémentaires
+
+482
+00:57:04,620 --> 00:57:15,000
+maintenant si on rentre au niveau repartie l'optimisation c'est fait pour moi là là on va
+
+483
+00:57:15,000 --> 00:57:22,080
+tenir compte du coup c'est à dire que le coup des transferts ok celui des transferts de données
+
+484
+00:57:22,080 --> 00:57:32,700
+entre les sites donc le délai que ça va prendre pour envoyer un donné d'un site à l'autre ça a un impact
+
+485
+00:57:32,700 --> 00:57:40,140
+sur l'optimisation comme je l'ai dit le trajet le plus court n'est pas forcément ce qu'il ya
+
+486
+00:57:40,140 --> 00:57:47,340
+de plus rapide donc selon les données qu'on a les délais de réponse qu'on a on va déduire ok tel
+
+487
+00:57:47,340 --> 00:57:54,660
+site ce serait mieux que j'aille là bas par rapport à tel site parallèle intraopérateur si on a dans un
+
+488
+00:57:54,660 --> 00:58:01,100
+cas de intra opération et comment est ce qu'on peut voir l'optimisation sur dans les cas de l'inter opération
+
+489
+00:58:01,100 --> 00:58:07,140
+comment est ce qu'on peut voir l'optimisation donc intra opération c'est une seule opération qu'on fait
+
+490
+00:58:07,140 --> 00:58:14,880
+mais qui a comme subdivisé ok qui a comme suivi on va parler tout à l'heure et puis son subdivise l'opération
+
+491
+00:58:14,880 --> 00:58:23,640
+il n'y a pas de parallélisme ok inter opération dans l'inter opération parler cette opération ça veut
+
+492
+00:58:23,640 --> 00:58:29,160
+dire que il ya des opérations qui se font en parallèle donc on va voir ces deux cas là
+
+493
+00:58:29,160 --> 00:58:40,080
+étape d'optimisation donc c'est un peu semblable à ce qu'on a vu avec lorsqu'on était dans un site
+
+494
+00:58:40,080 --> 00:58:46,320
+local à l'inter là c'est un peu semblable sauf que la différence c'est que on rentre il ya les
+
+495
+00:58:46,320 --> 00:58:52,560
+fragments c'est à dire que on tient compte du fragment c'est à dire que le les données dont on
+
+496
+00:58:52,560 --> 00:58:57,600
+a besoin là on tient compte des statistiques sur les fragments donc c'est à dire que comme je l'ai
+
+497
+00:58:57,600 --> 00:59:03,660
+dit tout à l'heure on a plusieurs sites qu'on peut contacter pour aller chercher des données mais
+
+498
+00:59:03,660 --> 00:59:10,620
+on va tenir compte du site qui est beaucoup plus rapide à nous apporter l'information ok donc on
+
+499
+00:59:10,620 --> 00:59:15,960
+a les données qu'on peut prendre sur le site b et le succès les deux ont les mêmes données dont j'ai
+
+500
+00:59:15,960 --> 00:59:21,540
+besoin mais c'est qui qui va m'apporter les données les plus rapidement dont on tient compte des statistiques
+
+501
+00:59:21,540 --> 00:59:28,620
+sur les fragments pour pouvoir exécuter la requête donc mais bien avant lorsqu'on place une requête sur un
+
+502
+00:59:28,620 --> 00:59:36,060
+système répartie il ya la décomposition on tient compte du schéma conceptuel et externe global ok
+
+503
+00:59:36,060 --> 00:59:43,680
+donc ça va se transformer en requêtes internes globales parce que si dans le fond on envoie une
+
+504
+00:59:43,680 --> 00:59:50,580
+requête on n'a aucune idée de où se trouve certaines données on ne sait pas où se trouve l'étape on ne
+
+505
+00:59:50,580 --> 01:00:00,180
+sait pas le schéma conceptuel global va nous aider en fait à nous aiguiller vers les tables qu'il faut
+
+506
+01:00:00,180 --> 01:00:05,040
+viser maintenant où sont ces tables là où sont ces données là le site de localisation va nous
+
+507
+01:00:05,040 --> 01:00:10,740
+fournir l'information on peut aller à montréal on peut aller à longueuil on peut aller à laval ok
+
+508
+01:00:10,740 --> 01:00:15,240
+je sais que je peux aller à montréal je sais que je peux aller à longueuil je sais que je peux aller à la
+
+509
+01:00:15,240 --> 01:00:21,120
+laval mais qui est le plus apte à me répondre à plus de moi mais là on va se servir des statistiques
+
+510
+01:00:21,120 --> 01:00:26,340
+vous dit ok selon ce que j'essaie c'est tel site qui peut te répondre rapidement et puis je m'en vais
+
+511
+01:00:26,340 --> 01:00:33,960
+ok maintenant sur chaque site participant l'optimisation se fait un peu comme ce qu'on a déjà vu
+
+512
+01:00:33,960 --> 01:00:41,860
+donc sur chaque site au niveau local on va se baser sur le schéma interne et bon les index et autres et sur
+
+513
+01:00:41,860 --> 01:00:48,220
+les statistiques ok donc les schémas interne vont venir nous aider parce que les juristiques ça change
+
+514
+01:00:48,220 --> 01:00:54,220
+pas ok donc les juristiques ça change pas mais ce qui va vraiment faire penser la balance vraiment là
+
+515
+01:00:54,220 --> 01:01:00,580
+il ya le schéma interne donc les index que vous allez construire avec les statistiques c'est les
+
+516
+01:01:00,580 --> 01:01:04,420
+deux qui sont dynamiques en fait c'est les deux qui peuvent avoir un impact sur les juristiques ça
+
+517
+01:01:04,420 --> 01:01:09,340
+change pas on en a besoin mais ces statistiques ça change pas là peu importe ce qu'on a c'est la
+
+518
+01:01:09,340 --> 01:01:17,440
+même chose mais les deux là on va vraiment ça va avoir un certain impact sur la performance que
+
+519
+01:01:17,440 --> 01:01:24,280
+sur l'optimisation parce que s'il n'y a pas d'index secondaire du tout c'est vrai qu'on peut se baser
+
+520
+01:01:24,280 --> 01:01:29,080
+sur les statistiques mais s'il y en avait mais ça pourrait nous aider même les statistiques
+
+521
+01:01:29,080 --> 01:01:32,180
+allait prouver que certains index nous aiderait à aller un peu plus vite
+
+522
+01:01:32,180 --> 01:01:46,180
+l'intra opération comme j'ai dit tout à l'heure dans l'intra opération qu'est ce qui se passe
+
+523
+01:01:46,180 --> 01:01:57,940
+c'est à dire que le mot le dit ici sans parallélisme vous savez du quoi c'est que on ne va pas quand on
+
+524
+01:01:57,940 --> 01:02:07,360
+dit ça parallèle c'est à dire que comprenez bien on ne veut pas exécuter deux requêtes en parallèle on
+
+525
+01:02:07,360 --> 01:02:17,020
+peut pas ça mais les requêtes peuvent se faire d'un site à l'autre ok mais pas de d'exécution en
+
+526
+01:02:17,020 --> 01:02:25,240
+parallèle ça dit sans ne pas que ça passe bien du parallèle mais on va pas exécuter à disons deux
+
+527
+01:02:25,240 --> 01:02:35,560
+requêtes de façon simultanée donc qu'est ce qui se passe ici en fait on veut faire deux jointures ici
+
+528
+01:02:35,560 --> 01:02:45,980
+ok on veut faire deux jointures on veut que le résultat soit affiché au site 3 dans le fond le
+
+529
+01:02:45,980 --> 01:02:52,580
+site 3 est comment le site coordonnateur et donc qu'est ce qu'on peut faire on a trois plans ici
+
+530
+01:02:52,580 --> 01:02:58,660
+ok admettons que c'est on a des fragments là donc on peut faire quoi on peut prendre la table t1
+
+531
+01:02:58,660 --> 01:03:08,920
+l'envoyer sur le site 2 faire une première jointure sur le site 2 ensuite le résultat de
+
+532
+01:03:08,920 --> 01:03:16,660
+cette requête là on l'envoie au site 3 et on fait la deuxième jointure pour afficher ça c'est une
+
+533
+01:03:16,660 --> 01:03:26,280
+possibilité la deuxième possibilité on fait le contraire on prend la table t2 on en va sur le site 1 on fait une
+
+534
+01:03:26,280 --> 01:03:31,600
+première jointure sur le site 1 le résultat de la jointure on l'envoie au site 3 ça aussi c'est
+
+535
+01:03:31,600 --> 01:03:40,140
+possible ou sinon on prend les deux tables on les envoie chaque chacune sur le site 3 et là on fait
+
+536
+01:03:40,140 --> 01:03:49,020
+une double jointure tout ça c'est possible mais qu'est ce qui va faire que on va choisir l'un ou l'autre
+
+537
+01:03:49,020 --> 01:03:58,440
+ça dépend des du délai de transmission donc si on est capable de payer c'est-à-dire que ce n'est
+
+538
+01:03:58,440 --> 01:04:05,260
+capable de d'économiser en termes de délai de transfert on va privilégier ce plan là donc ce
+
+539
+01:04:05,260 --> 01:04:09,840
+qui ce qui rentre ici en ligne de jeu c'est que c'est au niveau de la bonne passante en fait donc
+
+540
+01:04:09,840 --> 01:04:17,340
+transférer des données d'un site à l'autre le coût que ça va prendre ça a un impact sur la performance
+
+541
+01:04:17,340 --> 01:04:35,460
+et si on a un deuxième cas une deuxième technique là qui est qui peut être utilisé aussi admettons
+
+542
+01:04:35,460 --> 01:04:44,280
+que on a une jointure à faire c'est à dire que le site 2 a besoin du résultat de la jointure ok
+
+543
+01:04:44,280 --> 01:04:49,980
+suivez moi bien parce que ça c'est un peu compliqué à comprendre je vais aller avec un décès là pour
+
+544
+01:04:49,980 --> 01:04:59,760
+ça ça va être facile donc on a quoi on a en à la table clients et on à la table commande
+
+545
+01:05:05,340 --> 01:05:09,840
+ok ici ça c'est le site 2
+
+546
+01:05:09,840 --> 01:05:18,840
+ça c'est le site 2 et ça là c'est le site 1
+
+547
+01:05:18,840 --> 01:05:30,060
+ok c'est ainsi deux on sait aussi que il ya une clé étrangère d'un commande qui pointe vers clients
+
+548
+01:05:30,060 --> 01:05:36,760
+ok ça on le sait parce qu'ici on a un fk là
+
+549
+01:05:36,760 --> 01:05:41,940
+n'est ce pas on le sait donc pour le plan 1
+
+550
+01:05:41,940 --> 01:05:44,400
+on peut faire quoi on prend
+
+551
+01:05:44,400 --> 01:05:53,060
+la table t1 qui est ici on l'envoie t1 c'est la table client on l'envoie sur le site 2 pour faire la jointure
+
+552
+01:05:53,060 --> 01:06:00,380
+ça c'est une première possibilité mais il ya une deuxième possibilité qu'est une technique qui peut
+
+553
+01:06:00,380 --> 01:06:09,020
+donner des résultats en termes d'optimisation c'est quoi comme on l'a dit le paramètre qui rentre en ligne
+
+554
+01:06:09,020 --> 01:06:17,540
+de jeu ici c'est le coût des transferts d'un site à l'autre ok c'est un paramètre qui va qui
+
+555
+01:06:17,540 --> 01:06:23,360
+devient déterminé ici donc qu'est ce qu'on va faire donc c'est le premier plan on prend la table t1
+
+556
+01:06:23,360 --> 01:06:28,580
+tout tout tout tout simplement on envoie sur les sites 2 pour la jointure ça c'est simple
+
+557
+01:06:28,580 --> 01:06:35,720
+il ya aucun problème mais sinon on peut essayer avec la stratégie par semi jointure ça veut dire quoi
+
+558
+01:06:35,720 --> 01:06:45,800
+on sait que bon la première stratégie on l'a fait je dirais d'une méthode un peu pas trop classique
+
+559
+01:06:45,800 --> 01:06:54,140
+ok on l'a fait pourquoi le premier plan peut être problématique le premier le premier plan peut être
+
+560
+01:06:54,140 --> 01:07:04,280
+problématique pourquoi parce que si admettons que on a 200 clients et parmi les 200 clients là il y a
+
+561
+01:07:04,280 --> 01:07:12,440
+en réalité que 20 clients qui ont commandé donc si on nous dit que il faut prendre toute cette table
+
+562
+01:07:12,440 --> 01:07:24,380
+là et l'envoyer sur le site 2 pour faire la jointure sur le site 2 on va transférer 180 clients pour rien
+
+563
+01:07:24,380 --> 01:07:31,220
+donc transférer 180 clients pour rien ça peut avoir un impact sur le délai parce que ce sont des données
+
+564
+01:07:31,220 --> 01:07:42,380
+qu'on va transmettre ok donc on pourrait éviter cela on pourrait éviter d'envoyer des clients qui
+
+565
+01:07:42,380 --> 01:07:47,420
+n'ont rien à voir avec la jointure donc qu'est ce qu'on fait en ce moment là donc la stratégie
+
+566
+01:07:47,420 --> 01:07:55,380
+semi jointure vient nous éviter de transférer des données de façon inutile pour faire une certaine
+
+567
+01:07:55,380 --> 01:08:01,380
+opération dans un contexte des parties donc qu'est ce qui va se passer ici qu'est ce qu'on a fait ça
+
+568
+01:08:01,380 --> 01:08:08,460
+dit que puisque c'est pas tous les clients qui ont commandé donc on va se donner la liste des clés
+
+569
+01:08:08,460 --> 01:08:13,140
+étrangères donc on a une couleur que l'étranger là donc admettons que les clients qui ont commandé là
+
+570
+01:08:13,140 --> 01:08:21,540
+au niveau de la colonne de la clé étrangère en un client 1 2 et 3 donc on voit que ces trois clients
+
+571
+01:08:21,540 --> 01:08:26,760
+qui ont commandé si on fait une observation des valeurs des clés étrangères dans la table commande
+
+572
+01:08:26,760 --> 01:08:36,000
+on voit que trois clients donc qu'est ce qu'on va faire on prend cfk là et on fait une projection
+
+573
+01:08:36,000 --> 01:08:43,200
+sur la colonne fk donc c'est ça qui est c'est ça qui est représenté par ça ok on fait une projection
+
+574
+01:08:43,200 --> 01:08:50,640
+donc on prend tout ce qui est clé et colonnes des clés étrangères qu'on envoie sur le site 1 d'abord
+
+575
+01:08:50,640 --> 01:08:58,620
+dans un premier temps donc la projection qui est représenté par qui des a ok donc on avance
+
+576
+01:08:58,620 --> 01:09:04,620
+et on va en avoir ces données là arrivé ici maintenant on va faire quoi on va faire une
+
+577
+01:09:04,620 --> 01:09:14,220
+semi-jointure donc t1 ici ça va être quoi t1 ça va être la table client donc ça c'est la table client
+
+578
+01:09:14,220 --> 01:09:23,400
+et t2 ça va représenter quoi la projection c'est à dire que c'est un ensemble des données qu'on a
+
+579
+01:09:23,400 --> 01:09:28,920
+envoyé donc ce sont les valeurs le long de la clé étrangère donc qu'est ce qui va se passer c'est que
+
+580
+01:09:28,920 --> 01:09:37,320
+le résultat de cette semi-jointure qui est r ici pas regrouper les informations des clients qui ont
+
+581
+01:09:37,320 --> 01:09:43,320
+vraiment commandé vous voyez c'est vraiment les clients qui ont vraiment commandé donc ce
+
+582
+01:09:43,320 --> 01:09:51,400
+résultat r qui est ici là le r qu'on a obtenu on va l'envoyer maintenant sur le site 2 et ce r là
+
+583
+01:09:51,400 --> 01:09:58,400
+c'est vraiment les clients qui ont vraiment commandé là donc on va éviter de balancer les
+
+584
+01:09:58,400 --> 01:10:06,140
+180 clients de façon inutile on va juste balancer que les 20 clients qui ont vraiment commandé et là
+
+585
+01:10:06,140 --> 01:10:11,000
+on fait la jointure maintenant avec les bons clients qui ont vraiment commandé donc vous
+
+586
+01:10:11,000 --> 01:10:15,140
+voyez donc qu'est ce qu'on a fait c'est vrai que ça fait beaucoup de va et vient c'est vrai on envoie
+
+587
+01:10:15,140 --> 01:10:23,000
+la projection on envoie le r depuis on fait la la jointure c'est vrai mais sauf que on a évité
+
+588
+01:10:23,000 --> 01:10:30,920
+d'envoyer des informations sur la bande passant de façon inutile qui pourrait causer un délai
+
+589
+01:10:30,920 --> 01:10:38,720
+supplémentaire vous voyez l'idée donc cette stratégie là il ya une condition il faut que la taille de la
+
+590
+01:10:38,720 --> 01:10:45,920
+projection plus la taille de r soit plus petit que la taille de la table t1 au complet parce que ça là
+
+591
+01:10:45,920 --> 01:10:57,800
+c'est où là pour le plan 1 et ça les deux ensemble là ici c'est pour le plan 2 donc toute une question
+
+592
+01:10:57,800 --> 01:11:04,700
+de taille parce que tous tous ces données là pour être envoyé sur la bande passante et voit être envoyé
+
+593
+01:11:04,700 --> 01:11:11,720
+va être transféré là donc le plan 1 il faut qu'on s'assise pour que là le plan de fonctionne il faut que le total
+
+594
+01:11:11,720 --> 01:11:21,740
+des données qui vont voyager le long de la bande passante soit petit à la taille de la table t1 qui
+
+595
+01:11:21,740 --> 01:11:26,900
+devait passer sur la bande passante au complet par rapport à la stratégie 1 au plan 1 voilà la
+
+596
+01:11:26,900 --> 01:11:32,780
+différence donc ça ça pourrait marcher si jamais la condition est là ça va être une très bonne
+
+597
+01:11:32,780 --> 01:11:41,060
+solution imaginez que c'est cinq clients sur moi qui ont commandé parce que il ya des je sais qu'il ya des
+
+598
+01:11:41,060 --> 01:11:49,160
+parfois c'est comme amazon là ok amazon vous pouvez créer un compte sur amazon et puis vous ne
+
+599
+01:11:49,160 --> 01:11:56,900
+commandez jamais personne ne va vous condamner pour ça là mais si on doit faire une jointure entre la
+
+600
+01:11:56,900 --> 01:12:05,180
+table client depuis les articles ou la table la table client avec la table commande mais vous voyez les
+
+601
+01:12:05,180 --> 01:12:11,120
+conséquences c'est à dire on risque de se ramasser à balancer des clients qui n'ont même pas
+
+602
+01:12:11,120 --> 01:12:18,200
+commandé et ça peut créer un problème sur la bande passante donc on va comme aller savoir ce qu'on
+
+603
+01:12:18,200 --> 01:12:24,240
+commande et d'abord ensuite on on transfère les données de ceux qui ont commandé vraiment avant
+
+604
+01:12:24,240 --> 01:12:36,480
+défaire l'argentur et donc ça c'est intra opération c'est à dire que on va pas c'est vrai qu'on contacte
+
+605
+01:12:36,480 --> 01:12:41,880
+plusieurs sites en même temps mais on va pas comme permet de faire une exécution en parallèle dans le fond
+
+606
+01:12:41,880 --> 01:13:01,620
+l'inter opération et inter opération et inter opérations et plusieurs opérations en parallèle ce qui va
+
+607
+01:13:01,620 --> 01:13:07,740
+se passer c'est que on peut faire une exécution en parallèle ok donc on a trois jointures à faire ici
+
+608
+01:13:07,740 --> 01:13:18,000
+ce qu'on va faire c'est que on exécute cette jointure et cette jointure les deux vont se faire
+
+609
+01:13:18,000 --> 01:13:25,480
+en parallèle et après on va transférer le résultat de chacun de ces jeunes qui l'a aussi un ici et ensuite
+
+610
+01:13:25,480 --> 01:13:35,520
+aussi on fait la jointure finale mais toujours je reviens au même problème pourquoi ne pas c'est à dire
+
+611
+01:13:35,520 --> 01:13:43,920
+qu'on a envoyé t2 au site 1 ensuite qu'est ce qu'on a fait on a envoyé t4 au site 3 mais pourquoi ne pas
+
+612
+01:13:43,920 --> 01:13:50,700
+faire le contraire on aurait pu faire le contraire si on avait les données qui nous permet de croire
+
+613
+01:13:50,700 --> 01:13:57,780
+que faire le contraire nous coûterait moins cher en termes de transfert de données donc tout repose sur
+
+614
+01:13:57,780 --> 01:14:03,780
+le transfert de données qu'est ce qui va faire que les données mettre les données sur la bande passante
+
+615
+01:14:03,780 --> 01:14:06,840
+ça va prendre moins de temps que l'autre solution
+
+616
+01:14:06,840 --> 01:14:15,840
+ok maintenant on va voir maintenant on va rentrer un peu dans les cas pratiques un tout petit peu là
+
+617
+01:14:15,840 --> 01:14:23,220
+on va essayer de voir c'est à dire que comment est ce que on a vu les bases on est les bases on est
+
+618
+01:14:23,220 --> 01:14:33,180
+on appelle ça virtuel ou les bases on est fédéré il ya de l'interconnexion qu'on fait ça dit qu'on va
+
+619
+01:14:33,180 --> 01:14:39,180
+établir une connexion sur plusieurs bases en arrière et donc comment ça s'est fait comment est ce que
+
+620
+01:14:39,180 --> 01:14:48,000
+on arrive à partir d'une certaine base de données établir un lien une connexion à une autre base de
+
+621
+01:14:48,000 --> 01:14:56,180
+données et pouvoir aller vous faire des opérations comment est ce qu'on fait ça il ya ce qu'on appelle
+
+622
+01:14:56,180 --> 01:15:08,360
+les liens ok il ya des liens on peut créer entre bases de données donc ici si j'ai créé un lien ça va
+
+623
+01:15:08,360 --> 01:15:15,180
+me permettre à partir d'un certain site ok de me connecter à une base de données qui est distante
+
+624
+01:15:15,180 --> 01:15:22,620
+donc si c'est partagé shirt ça dit qu'on peut partager à certains utilisateurs si c'est public
+
+625
+01:15:22,620 --> 01:15:32,700
+tout le monde peut utiliser le lien donc exemple ceci bon j'ai mis ici un lien et enfin une référence
+
+626
+01:15:32,700 --> 01:15:36,360
+pour ceux qui veulent aller un peu plus loin en fait ça s'est fait simplement c'est pas compliqué c'est
+
+627
+01:15:36,360 --> 01:15:43,080
+comme vous créez un objet normal en base de données ce qu'on vous créez un objet qui est normal la façon
+
+628
+01:15:43,080 --> 01:15:52,140
+que vous faites créer table là c'est pareil donc j'ai créé mon lien que j'appelle vente ok le nom
+
+629
+01:15:52,140 --> 01:16:00,780
+d'utilisateur le mot de passe et le sales là ça indique en fait les paramètres que je dois aller
+
+630
+01:16:00,780 --> 01:16:07,200
+utiliser dans le fichier tsnm aura donc ce que ça va faire c'est que il va aller dans ce fichier là
+
+631
+01:16:07,200 --> 01:16:15,960
+il arrive dans ce fichier donc il sait qu'elle base de données le serveur de l'adresse ip ou le
+
+632
+01:16:15,960 --> 01:16:24,580
+nom le port il va savoir qu'il faut se connecter à ce service même là ok donc je vous invite si
+
+633
+01:16:24,580 --> 01:16:28,980
+vous avez tant d'étendez un coup d'oeil à la référence là donc il ya aussi on peut faire ça in line
+
+634
+01:16:28,980 --> 01:16:41,740
+il est c'est quoi c'est que c'est ma petite crise on peut faire in line c'est quoi c'est que on n'est pas
+
+635
+01:16:41,740 --> 01:16:50,160
+obligé de mappé le nom des paramètres de connexion aux détails qui sont dans le fichier tsnm aura point
+
+636
+01:16:50,160 --> 01:16:57,600
+et tout ce que vous voyez ici là ok on peut le faire in line c'est que on peut l'injecter si
+
+637
+01:16:57,600 --> 01:17:04,140
+directement qui semble sans faire le mapping dans le fichier tsnm et donc je vous invite si vous avez
+
+638
+01:17:04,140 --> 01:17:09,600
+le temps tout est détaillé là vous avez toutes les informations dans comment faire ça maintenant
+
+639
+01:17:09,600 --> 01:17:15,660
+on a créé notre lien comment est ce qu'on l'utilise donc pour l'utiliser voici un exemple
+
+640
+01:17:15,660 --> 01:17:22,560
+donc on a créé le lien et pour l'appeler et bon même ça même c'est pas c'est pas je pense pas
+
+641
+01:17:22,560 --> 01:17:27,540
+que c'est obligé de mettre le nom d'utilisateur là je suis pas sûr m'a fait je pense c'est pas
+
+642
+01:17:27,540 --> 01:17:35,220
+nécessaire des exemples là où ça prend pas ça donc catalogue c'est quoi c'est là c'est une table qui se
+
+643
+01:17:35,220 --> 01:17:42,000
+trouve où c'est une table qui se trouve dans la base de données qu'on contacte avec la référence qui est
+
+644
+01:17:42,000 --> 01:17:51,260
+ici et using ça c'est en fait pour faire le mapping avec les détails de connexion et donc
+
+645
+01:17:51,260 --> 01:17:55,680
+catalogue là c'est une table qui se trouve sur la base de données qui se trouve dans un autre pays
+
+646
+01:17:55,680 --> 01:18:05,220
+ou ailleurs c'est pas forcément notre pays là mais je veux dire ok donc ça c'est un lien on peut aussi
+
+647
+01:18:05,220 --> 01:18:12,000
+faire un synonyme c'est-à-dire que si ici par exemple on sait que c'est le canton son a pas de
+
+648
+01:18:12,000 --> 01:18:19,860
+sinon ça dit que quoi ça dit que il faut à chaque fois spécifier le nom du lien ok mais si on veut
+
+649
+01:18:19,860 --> 01:18:27,480
+éviter ça qu'est ce qu'on peut faire on peut créer un synonyme c'est-à-dire que on va créer un synonyme qui va
+
+650
+01:18:27,480 --> 01:18:43,140
+va être lié à notre lien ici ok donc ici on va cibler catalogue c'est-à-dire qu'on va lier un objet à une certaine ressource qu'on souhaite aller chercher ailleurs ok donc qu'est-ce que
+
+651
+01:18:43,140 --> 01:18:56,400
+on va faire si on a besoin d'aller chercher les informations des catalogues en europe on va faire select all from catalogue europe tout simplement ok donc si on fait ça ça permet
+
+652
+01:18:56,400 --> 01:19:06,800
+de conserver les mêmes requêtes même si le lien change donc ça facilite la maintenance ok donc si le lien change là on n'a pas besoin de se promener
+
+653
+01:19:06,800 --> 01:19:14,900
+partout pour changer le lien admettons que c'est plus un site europe là ok ça devient c'est pour moi site
+
+654
+01:19:14,900 --> 01:19:18,300
+c'est pas site
+
+655
+01:19:18,300 --> 01:19:28,300
+ue ok union européenne donc si le sur les liens change de nom mais toutes les requêtes là qu'on utilise partout dans
+
+656
+01:19:28,300 --> 01:19:34,100
+notre application ça change pas on va tout simplement changer le nom du lien et ça s'arrête là donc c'est ce qu'on
+
+657
+01:19:34,100 --> 01:19:42,260
+essaie d'expliquer ici là ok pour les liens donc et on va pas copier ok donc c'est un lien le synonyme utilise un
+
+658
+01:19:42,260 --> 01:19:47,000
+lien il n'y a pas de copie des données c'est juste que on va chercher et on vient avec
+
+659
+01:19:47,000 --> 01:19:57,020
+et évite aux applications de devoir connaître la localisation des données donc bon je veux dire c'est une
+
+660
+01:19:57,020 --> 01:20:02,500
+façon de paille on peut dire ça comme ça on évite de à travers l'application des dix où se trouvent les
+
+661
+01:20:02,500 --> 01:20:07,220
+données ouais n'est pas obligé de dire où se trouvent les données forcément donc on veut qu'on veut
+
+662
+01:20:07,220 --> 01:20:12,200
+être transparent comme on l'a dit la transparence donc on peut être transparent aux personnes qui
+
+663
+01:20:12,200 --> 01:20:17,000
+nous qui utilisent l'application donc c'est quand même pas mal oui ça peut être un point positif
+
+664
+01:20:21,680 --> 01:20:28,040
+maintenant les vues matérialisées donc les synonymes on va pas faire des copies mais si on
+
+665
+01:20:28,040 --> 01:20:33,020
+veut faire des copies en local on va l'utiliser quoi des vues matérialisées qu'on a vu donc les vues
+
+666
+01:20:33,020 --> 01:20:40,260
+matérialisées vont faire des copies on l'a déjà vu on va faire des copies vraiment ok donc exemple ici
+
+667
+01:20:40,260 --> 01:20:47,300
+donc qu'est-ce qu'on va faire ça veut que si on veut pas se contenter du lien ok il est 21 ok je vais
+
+668
+01:20:47,300 --> 01:20:54,860
+essayer d'accélérer un peu parce qu'il faut absolument qu'on termine si on ne veut pas se contenter d'un lien
+
+669
+01:20:54,860 --> 01:21:01,680
+on veut avoir des copies des données au niveau de notre site local donc là on va créer une vue
+
+670
+01:21:01,680 --> 01:21:10,760
+matérialisées comme ici par exemple on va aller faire une copie des données en europe jumelées à des
+
+671
+01:21:10,760 --> 01:21:18,100
+copies qui se trouvent ici au canada donc si on veut afficher la liste de tous les clients on va
+
+672
+01:21:18,100 --> 01:21:23,740
+faire cela et là ça va récupérer les données d'une autre vue matérialisées et l'affiché
+
+673
+01:21:23,740 --> 01:21:36,280
+exemple donc ça c'est les des exemples pratiques pour créer des liens ou fait des copies des données
+
+674
+01:21:36,280 --> 01:21:48,220
+maintenant pour ce qui est du parallélisme on ne peut pas parler des parallèles s'il n'y a pas
+
+675
+01:21:48,220 --> 01:21:53,200
+plusieurs disques si vous n'avez pas plusieurs disques là on ne peut pas parler des parallèles
+
+676
+01:21:53,200 --> 01:21:57,820
+ça prend plusieurs disques donc à partir de plusieurs disques d'un certain site local là on
+
+677
+01:21:57,820 --> 01:22:05,920
+peut parler des parallèles sans ce moment là mais on va quand on quand on parle des parallèles des
+
+678
+01:22:05,920 --> 01:22:15,400
+disques là ça vient avec certains enjeux c'est quoi ces enjeux là on a plusieurs disques on va
+
+679
+01:22:15,400 --> 01:22:21,580
+aller chercher des stratégies pour gérer les données qui sont dans ces disques là ok donc on a plusieurs
+
+680
+01:22:21,580 --> 01:22:28,900
+données à travers les disques là on veut s'assurer que sur l'ensemble de nos disques là les données sont
+
+681
+01:22:28,900 --> 01:22:36,400
+gérées comme il faut comme quoi par exemple on veut s'assurer que soit les données sont dupliquées
+
+682
+01:22:36,400 --> 01:22:43,360
+donc si c'est une duplication qui suffit mais ça fait en sorte que c'est un disque qui tombe il
+
+683
+01:22:43,360 --> 01:22:48,760
+ya un autre qui peut prendre la relève ok donc d'un disque à l'autre il ya des données qui sont dupliquées
+
+684
+01:22:48,760 --> 01:22:58,520
+donc on va viser la fiabilité sinon on peut aussi viser ce qu'on appelle le stripping on peut aussi viser
+
+685
+01:22:58,520 --> 01:23:05,620
+les cas de d'erreur parce que il ya des données qui peut être corrompu quelque part là donc il faut
+
+686
+01:23:05,620 --> 01:23:10,420
+qu'on s'assure que là où est ce qu'il ya eu corruption des données on puisse apporter de la
+
+687
+01:23:10,420 --> 01:23:16,600
+correction donc ces stratégies les trois stratégies sont regroupés ici pas vous allez attendre parler de
+
+688
+01:23:16,600 --> 01:23:21,940
+ça donc si vous avez des serveurs qui ont plusieurs disques là ce sont des enjeux qu'il va falloir penser
+
+689
+01:23:21,940 --> 01:23:28,480
+à cela donc des stratégies qui vont viser les disques à miroir donc les disques à miroir on va mettre
+
+690
+01:23:28,480 --> 01:23:35,380
+l'accent sur la sur la duplication des données d'un disque à l'autre on à l'intérieur des mêmes
+
+691
+01:23:35,380 --> 01:23:42,940
+services d'un site local d'un disque à l'autre on va dupliquer les données il ya la stratégie de
+
+692
+01:23:42,940 --> 01:23:51,700
+de correction d'erreur donc on va faire quoi on va essayer de retrouver des erreurs et on va les
+
+693
+01:23:51,700 --> 01:24:00,580
+corriger ok ici c'est pas si vous connaissez le le bill des parités là mais bon on n'est pas en
+
+694
+01:24:00,580 --> 01:24:12,400
+réseau mais en fait c'est une technique qui permet de détecter la corruption des données c'est à dire que si il ya
+
+695
+01:24:12,940 --> 01:24:23,140
+il ya des séquences des bits qui arrivent et puis si le bill des parités c'est à dire que si le bill des
+
+696
+01:24:23,140 --> 01:24:31,540
+parités est à c'est pas moi et père par exemple mais on s'attend à ce que le nom des bits 1 soit
+
+697
+01:24:31,540 --> 01:24:38,320
+père aussi ok parce que en tout cas c'est pas trop efficace parce que souvent il ya des faux positifs là
+
+698
+01:24:38,320 --> 01:24:45,880
+donc si le sur le bill des parités impaire ça veut dire que le nom des bits à 1 au niveau de la
+
+699
+01:24:45,880 --> 01:24:54,460
+donnée qui arrive est impaire donc si le nom des bits est supposé le nom des bits 1 est supposé être
+
+700
+01:24:54,460 --> 01:25:02,380
+impaire eux que on retrouve un ensemble de bits 1 qui sont paires que le nom des bits est père
+
+701
+01:25:02,380 --> 01:25:07,240
+peut-être qu'il ya un problème c'est à dire que la donnée est corrompu ok donc on va on va rejeter puis
+
+702
+01:25:07,240 --> 01:25:13,120
+redemander une autre transmission ok donc on va demander une autre transmission on va s'assurer que
+
+703
+01:25:13,120 --> 01:25:22,620
+le nom le bill des parités ce que ça donne est cohérent avec l'ensemble des bits qu'on observe mais
+
+704
+01:25:22,620 --> 01:25:31,020
+c'est pas efficace je vous dis parce que je peux avoir des cas où ça veut rien dit le code amène pour
+
+705
+01:25:31,020 --> 01:25:36,540
+faire des corrections il ya le stripping aussi qui est une stratégie lorsqu'on a plusieurs disques à gérer
+
+706
+01:25:36,540 --> 01:25:46,760
+qui vont qui va enfin cette stratégie va viser la performance c'est quoi c'est que on va on va pas faire la
+
+707
+01:25:46,760 --> 01:25:54,120
+duplication là on va essayer de repartir les données sur plusieurs disques qu'est et ça c'est c'est très
+
+708
+01:25:54,120 --> 01:26:01,660
+très très intéressant et sans vous allez trouver un peu dans plusieurs endroits qu'est ce que ça fait
+
+709
+01:26:01,660 --> 01:26:14,360
+le stripping ça dit que on a admettons qu'on a c'est pas moi mille mille lignes à stocker ok on
+
+710
+01:26:14,360 --> 01:26:25,040
+mettra 500 ici et on mettra 500 là ok les 500 lignes des parés 2 sont différentes donc si on a
+
+711
+01:26:25,040 --> 01:26:32,300
+besoin de retourner les lignes enfin select all si on fait un select all from table on envoie un
+
+712
+01:26:32,300 --> 01:26:42,200
+traitement ici et on envoie un traitement là donc de façon parallèle on va retourner cette donnée là
+
+713
+01:26:42,200 --> 01:26:49,920
+pourquoi c'est efficace parce que ici au niveau de ce disque là on a 500 lignes à aller chercher ici
+
+714
+01:26:49,920 --> 01:26:56,660
+aussi on a 500 lignes à aller chercher non ça fait moins des blocs si admettons que admettons qu'on
+
+715
+01:26:56,660 --> 01:27:06,020
+avait 1000 ici et on avait 1000 ici mais là transférer 500 blocs et transférer le nombre de blocs pour les
+
+716
+01:27:06,020 --> 01:27:12,560
+500 lignes c'est beaucoup plus meilleur que transférer le nombre de blocs pour 1000 lignes donc c'est là que
+
+717
+01:27:12,560 --> 01:27:22,280
+on dit que le stripping là ça améliore la performance à lecture et écriture et passer d'un disque à l'autre on
+
+718
+01:27:22,280 --> 01:27:25,940
+a moins de blocs à aller chercher parce qu'il ya moins de lignes on a fait une répartition en fait
+
+719
+01:27:25,940 --> 01:27:35,240
+donc quand on fait le stripping on peut le fait pas habite où on peut le fait pas pas bloc ok par bic ou
+
+720
+01:27:35,240 --> 01:27:50,300
+pas bloc donc maintenant et cette stratégie là ont été formalisés donc quand j'ai dit formaliser les
+
+721
+01:27:50,300 --> 01:27:55,760
+les stratégies c'est à dire qu'il ya on a fait certaines combinaisons des stratégies qui visent
+
+722
+01:27:55,760 --> 01:28:01,880
+autour des affaires idées on a fait une normalisation des méthodes qui tournent autour de ces trois
+
+723
+01:28:01,880 --> 01:28:12,140
+stratégies là ok c'est quoi c'est ces méthodes là c'est les acheter du raid donc si vous avez plusieurs
+
+724
+01:28:12,140 --> 01:28:24,200
+disque à gérer vous pouvez décider d'aller en red 0 en red 1 red 2 3 4 5 ou 6 ça veut dire quoi donc
+
+725
+01:28:24,200 --> 01:28:33,800
+si vous décidez d'aller en red 0 ça veut dire que vous allez viser la performance la redonnance là c'est
+
+726
+01:28:33,800 --> 01:28:41,580
+pas votre souci là de vous viser la performance donc qu'est ce qui va se passer on va répartir des
+
+727
+01:28:41,580 --> 01:28:49,560
+blocs des données à travers les disques en fait donc ce qui va faire que d'un disque à l'autre on a
+
+728
+01:28:49,560 --> 01:28:56,820
+moins de blocs à aller chercher et là si on envoie une lecture parallèle ça va être facile très rapide
+
+729
+01:28:56,820 --> 01:29:01,540
+en fait et parce que d'un disque à l'autre on a moins de blocs à aller chercher dans ça c'est le
+
+730
+01:29:01,540 --> 01:29:09,340
+red 0 ça donc si vous avez plusieurs disques à gérer sur un serveur la stratégie red 0 permet quand vous
+
+731
+01:29:09,340 --> 01:29:14,260
+avez plusieurs disques de faire du stripping c'est à dire que de copier les données sur plusieurs
+
+732
+01:29:14,260 --> 01:29:18,820
+disques mais les données ne se répètent pas donc si on a une lecture à faire on envoie une lecture
+
+733
+01:29:18,820 --> 01:29:26,260
+parallèle et ça retourne les résultats rapidement ok donc pour une base de données qu'on veut aller
+
+734
+01:29:26,260 --> 01:29:30,700
+chercher une meilleure performance on peut aller en red 0 parce qu'il ya du stripping qui est en place
+
+735
+01:29:30,700 --> 01:29:41,100
+il ya le red 1 qui va viser la stratégie des disques à miroir donc ici on va viser voyager deux types de
+
+736
+01:29:41,100 --> 01:29:50,380
+red 1 il ya le red 1 qui est ici et puis à leur aide 0 plus 1 ou red 10 on verra ça s'appelle pas red 10
+
+737
+01:29:50,380 --> 01:29:58,600
+aussi pour le red 1 tout court on va vous le voyez en fait on vise les deux dans le fond là c'est que on vise
+
+738
+01:29:58,600 --> 01:30:06,220
+les deux on vise la fiabilité et la performance la fiabilité pourquoi parce qu'on a une duplication
+
+739
+01:30:06,220 --> 01:30:14,440
+ok on a des duplications là non seulement on a des duplications on a aussi du stripping qui est en
+
+740
+01:30:14,440 --> 01:30:22,040
+place parce qu'on peut lire en parallèle ici et là c'est des données différentes et on a aussi la
+
+741
+01:30:22,040 --> 01:30:31,220
+duplication on a les deux dans le fond le 0 plus 1 va faire la même chose sauf que on va faire quoi on
+
+742
+01:30:31,220 --> 01:30:38,420
+va faire le stripping par bloc ici c'est en fait c'est pas ce que vous voyez là dans le 1 là on va
+
+743
+01:30:38,420 --> 01:30:44,420
+pas on va faire des copies complètes ok ça dit qu'on va pas diviser par bloc là les copies vont pas se
+
+744
+01:30:44,420 --> 01:30:50,540
+fait par bloc on fait une copie complète dans un disque alors qu'ici le 0 plus 1 c'est pas ça ça
+
+745
+01:30:50,540 --> 01:30:58,700
+dit que la copie complète elle est faite à travers deux disques ici et la même chose est fait avec ces
+
+746
+01:30:58,700 --> 01:31:05,360
+deux disques là oui non c'est ça là donc de l'autre côté les copies se font avec des données complètes
+
+747
+01:31:05,360 --> 01:31:10,820
+d'un disque à l'autre de l'autre côté les copies complètes se font pas par groupe de deux disques ou
+
+748
+01:31:10,820 --> 01:31:17,060
+c'est-à-dire que les copies se font par bloc en fait les copies se font par bloc donc on a 0 1 0 1 ça
+
+749
+01:31:17,060 --> 01:31:23,720
+se répète donc des copies se font par bloc 2 3 on a 2 3 alors que l'autre c'est pas le cas
+
+750
+01:31:23,720 --> 01:31:32,600
+le red 2 lui là il va mettre l'accent sur la correction d'erreur donc si vous voulez aller
+
+751
+01:31:32,600 --> 01:31:38,540
+avec c'est-à-dire que si vous voulez pas vous retrouvez avec des données corrompues mais le red 2 c'est ce
+
+752
+01:31:38,540 --> 01:31:49,940
+qu'il vous faut donc lui on le voit ici il va copier les données a1 a2 a3 a4 b1 b2 b3 b4 mais il va
+
+753
+01:31:49,940 --> 01:31:56,060
+conserver des disques là où est-ce qu'on va mettre des données qui vont nous permet de corriger les
+
+754
+01:31:56,060 --> 01:32:06,020
+erreurs ok le red 3 répartition par par bits ou octets un disque de parité donc ici le red 3 on va
+
+755
+01:32:06,020 --> 01:32:13,880
+faire quoi on va faire un genre de zoe 1 2 3 4 donc on fait du stripping on fait du stripping et on
+
+756
+01:32:13,880 --> 01:32:21,680
+a un disque qui va être utilisé pour détecter les erreurs on a parlé de les paires de parité là la
+
+757
+01:32:21,680 --> 01:32:30,860
+détection par paire de parité le red 4 répartition par bloc plus un disque de parité pour les cas d'erreur
+
+758
+01:32:30,860 --> 01:32:40,420
+le reste 5 répartition par bloc et on a un bloc de parité sur chaque disque ici donc ça dépend de
+
+759
+01:32:40,420 --> 01:32:47,240
+vos objectifs dans le fond là donc en fonction des objectifs convient on va choisir et ils ont une
+
+760
+01:32:47,240 --> 01:32:54,100
+architecture et dans cette architecture là à des objectifs au niveau des stratégies qu'on a dit tout à
+
+761
+01:32:54,100 --> 01:33:03,760
+à l'heure là qu'on a expliqué tout à l'heure donc les plus utilisés on arrête 1 qu'elle puisse utiliser
+
+762
+01:33:03,760 --> 01:33:11,500
+le red 10 aussi le red 5 il n'y a pas longtemps j'avais on parlait d'un serveur là puis la personne
+
+763
+01:33:11,500 --> 01:33:15,820
+qui a qui s'occupe du serveur m'a dit que c'était red 5 qui était en place donc il y avait plusieurs disques
+
+764
+01:33:15,820 --> 01:33:23,860
+et lui il a mis en place le red 5 donc ce sont les plus utilisés 1 0 plus ou le 10 red 5 et
+
+765
+01:33:24,100 --> 01:33:34,420
+ok quand on a parlé de fragmentation là ok et la fragmentation comme j'ai dit la fragmentation
+
+766
+01:33:34,420 --> 01:33:44,860
+on va subdiviser les données le long soit on le fait de façon verticale ou horizontale si on veut
+
+767
+01:33:44,860 --> 01:33:51,820
+faire une fragmentation horizontale qu'est ce qu'on peut faire c'est très utile dans les entrepôts de
+
+768
+01:33:51,820 --> 01:33:57,520
+données parce que parfois dans les entrepôts de données là on a on a plusieurs données à traiter
+
+769
+01:33:57,520 --> 01:34:05,560
+donc parfois on peut on peut décider par exemple de de couper la ligne de les envoyer sur plusieurs
+
+770
+01:34:05,560 --> 01:34:09,640
+serveurs pour faire un traitement parallèle parce qu'il ya beaucoup de lignes à les chercher donc si
+
+771
+01:34:09,640 --> 01:34:14,800
+on veut faire ça qu'est ce qu'on peut se baser sur quoi on peut se baser sur les intervalles des valeurs
+
+772
+01:34:14,800 --> 01:34:20,260
+c'est-à-dire que on peut décider par exemple pour c'est-à-dire que par année par exemple
+
+773
+01:34:20,260 --> 01:34:25,720
+c'est-à-dire que les lignes qui datent de 2024 vont être dans un fragment les lignes qui datent
+
+774
+01:34:25,720 --> 01:34:31,960
+de 2025 vont être dans un autre fragment aussi on peut aussi faire par par h sur la clé c'est-à-dire
+
+775
+01:34:31,960 --> 01:34:37,360
+que on va prendre par exemple la clé primaire on va appliquer une fonctionner à charge et en fonction
+
+776
+01:34:37,360 --> 01:34:45,160
+du résultat les lignes seront de part et d'autre au niveau de certains fragments bon ici on a un
+
+777
+01:34:45,160 --> 01:34:55,120
+exemple donc on a un tab ici transactions et on va créer des fragments en se basant sur les dates
+
+778
+01:34:55,120 --> 01:35:04,060
+dont on aura un fragment qui va contenir les les dates qui sont plus petites que janvier 2000 il y en
+
+779
+01:35:04,060 --> 01:35:13,780
+qui sont les dames plus petit que janvier 2000 2021 et c'est donc on va en fonction des dates
+
+780
+01:35:13,780 --> 01:35:30,820
+par exemple on va créer des fragments ok l'action parallèle ça je vous ai parlé de ça bien avant si
+
+781
+01:35:30,820 --> 01:35:38,020
+on est capable à l'intérieur des mêmes disques des mêmes sites si on a des fragments ici on a trois
+
+782
+01:35:38,020 --> 01:35:48,460
+fragments donc qu'est ce qui va se passer c'est que on va améliorer les sélections ok on va d'un
+
+783
+01:35:48,460 --> 01:35:52,600
+disque à l'autre on va mettre des données qui sont différentes dans ce mail les données qui sont
+
+784
+01:35:52,600 --> 01:36:03,400
+différentes en termes de des performances là c'est pas mal efficace comment ça ici on a un fragment je
+
+785
+01:36:03,400 --> 01:36:08,860
+l'ai déjà expliqué donc on aime on a un fragment ici on a un autre fragment là on a le fragment ici
+
+786
+01:36:08,860 --> 01:36:17,800
+donc ça fait que les lignes de la table ont été divisés en plusieurs morceaux et envoyés sur différents
+
+787
+01:36:17,800 --> 01:36:23,380
+disques dans le fond donc si ça envoie sur différents disques ce qu'on va faire c'est que sonne sélection à
+
+788
+01:36:23,380 --> 01:36:28,720
+faire on va envoyer la sélection en parallèle sur plusieurs disques là ça va être beaucoup plus rapide
+
+789
+01:36:28,720 --> 01:36:38,980
+donc moins de blocs à lire par disque au niveau de la jointure on a la même situation aussi au niveau de
+
+790
+01:36:38,980 --> 01:36:49,180
+la jointure et donc t'apparentable enfant si on fait disons admettons que on crée des fragments par
+
+791
+01:36:49,180 --> 01:36:57,520
+à charge qui sont créés des fragments pas à charge donc qu'est ce qu'il va s'est passé mais le parent
+
+792
+01:36:57,520 --> 01:37:04,780
+et le parent et les enfants vont se retrouver dans le même fragment donc le fragment un qui est ici là
+
+793
+01:37:04,780 --> 01:37:13,900
+on retrouve dans ce fragment là les données du parent et les données de l'enfant donc du coup
+
+794
+01:37:13,900 --> 01:37:21,760
+si on fait une jointure parallèle ce qui va s'est passé c'est que on envoie la jointure splittée sur
+
+795
+01:37:21,760 --> 01:37:29,080
+plusieurs disques et il est fort probable que sur les disques qui contiennent les fragments contiennent
+
+796
+01:37:29,080 --> 01:37:37,360
+déjà en quelque sorte les lignes qu'on peut joindre vous voyez l'idée donc si on a des fragments enfin
+
+797
+01:37:37,360 --> 01:37:43,840
+si on a plusieurs disques et qu'on est capable de créer des fragments dans le cas de l'étude
+
+798
+01:37:43,840 --> 01:37:49,060
+parallèle c'est pas mal efficace donc d'un disque à l'autre on a moins de blocs à faire monter et pour
+
+799
+01:37:49,060 --> 01:37:58,480
+aller un peu plus vite maintenant si on veut encore améliorer les choses ok ça dépend des moyens on a vu
+
+800
+01:37:58,480 --> 01:38:05,920
+que sans sans des disques à sans sans des disques en parallèle on ne peut pas faire des transactions
+
+801
+01:38:05,920 --> 01:38:10,600
+parallèles c'est pas possible on peut pas faire d'opérations parallèles ça prend plusieurs disques ok
+
+802
+01:38:10,600 --> 01:38:20,200
+mais on peut améliorer cette capacité là en faisant quoi on peut décider d'aller chercher plusieurs
+
+803
+01:38:20,200 --> 01:38:27,580
+unités de traitement plusieurs cpu pour nous aider à aller encore plus vite ok donc si on décide d'aller
+
+804
+01:38:27,580 --> 01:38:31,920
+dans ce dans ce mécanisme là c'est vrai on a plusieurs unités de traitement mais sauf que
+
+805
+01:38:31,920 --> 01:38:37,660
+on a une seule mémoire donc du coup il y aurait un problème c'est vrai que les cpu là vont se partager
+
+806
+01:38:37,660 --> 01:38:43,720
+la même mémoire du coup ça peut représenter un coulou d'étranglement sauver par lié à ça on peut
+
+807
+01:38:43,720 --> 01:38:53,600
+encore aller plus plus loin on peut décider de d'avoir mémoire centrale ou plusieurs unités de
+
+808
+01:38:53,600 --> 01:38:59,560
+traitement et là encore ça va encore aller aider à l'encore plus plus mieux et ça va permettre d'aller
+
+809
+01:38:59,560 --> 01:39:04,720
+encore plus rapidement ça faut avoir les moyens et ça savez des serveurs qui vont coûter quand même
+
+810
+01:39:04,720 --> 01:39:09,280
+assez cher parce qu'il ya plusieurs éléments là dedans qui permet d'aller chercher une certaine
+
+811
+01:39:09,280 --> 01:39:16,720
+performance pour aller un peu plus vite dans les opérations qu'on veut faire ok donc voilà pour
+
+812
+01:39:16,720 --> 01:39:25,540
+pour ce chapitre là donc sujet près donc il faut y penser quand on a une base de la caisse centrale il
+
+813
+01:39:25,540 --> 01:39:33,900
+faut penser à créer une certaine répartition ou et répartir la charge et puis au niveau local les
+
+814
+01:39:33,900 --> 01:39:38,280
+architectures parallèles avec plusieurs disques on est capable d'aller chercher une certaine
+
+815
+01:39:38,280 --> 01:39:43,740
+performance et puis faut tenir compte des types d'architecture qu'on va mettre en place en fonction
+
+816
+01:39:43,740 --> 01:39:50,160
+de nos objectifs au vu des trois stratégies qu'on a vu ok donc c'était tout pour ce chapitre là
+
+817
+01:39:50,160 --> 01:39:58,320
+donc on a fini on a fini tout un peu plus tôt donc on va arrêter là donc la semaine prochaine
+
+818
+01:39:58,320 --> 01:40:05,940
+comme je l'ai dit ce sera pas enregistré que je vais pas enregistrer donc on va une question
+
+819
+01:40:05,940 --> 01:40:19,140
+et bonjour est ce qu'il ya cette possibilité oui il ya une personne qui pose la question à savoir est-ce
+
+820
+01:40:19,140 --> 01:40:25,740
+que il aurait un document des révisions comme celui de l'intra oui effectivement je vais je vais préparer le
+
+821
+01:40:25,740 --> 01:40:31,740
+document le week-end je suis super chargé là mais bon je vais essayer de faire ça le plus a fait un
+
+822
+01:40:31,740 --> 01:40:37,860
+peu plus en avance parce que celui qui est là j'ai j'ai un projet qui est de gens la date plutôt assez
+
+823
+01:40:37,860 --> 01:40:41,760
+le week-end mais bon c'est pas grave je vais m'arranger donc je vais essayer je vais trouver un
+
+824
+01:40:41,760 --> 01:40:45,240
+temps pour faire ce document là et puis il ya pas de problème je vais mettre à votre disposition
+
+825
+01:40:45,240 --> 01:40:51,660
+qui m'a fait présent moi j'ai même si un document des révisions là c'est pas tout ce que j'ai dit que
+
+826
+01:40:51,660 --> 01:40:55,980
+je mets souvent dans les présentations parce qu'il ya certains détails que je peux pas mettre dans les
+
+827
+01:40:55,980 --> 01:41:00,660
+présentations c'est dans les explications que je suis fourni ces informations là je vous encourage à être
+
+828
+01:41:00,660 --> 01:41:13,560
+là ok est ce qu'il ya d'autres questions question ok non donc je rappelle pour l'examen final
+
+829
+01:41:13,560 --> 01:41:24,960
+c'est deux feuilles de notes recto verso ok donc manuscrite ou imprimé ok donc deux feuilles de
+
+830
+01:41:24,960 --> 01:41:32,060
+notes recto verso format maximal à 4 ok je veux pas dire voilà comment à l'intra sauf que c'est deux
+
+831
+01:41:32,060 --> 01:41:39,720
+feuilles de notes voilà calculatrice vous avez besoin de votre calculatrice ouais c'est tout comme je l'ai
+
+832
+01:41:39,720 --> 01:41:45,480
+dit le chemin de toi vous n'allez pas échapper donc il aura quelque chose sur le chemin le chemin
+
+833
+01:41:45,480 --> 01:41:52,020
+d'étoiles donc la modélisation il ya des calculs à faire pour les performances les calculs de
+
+834
+01:41:52,020 --> 01:41:56,640
+performance il a des calculs à faire j'aime pas me cacher quoi mais bon je suis quand même assez
+
+835
+01:41:56,640 --> 01:42:00,960
+transparent mais je dis pas tout non plus bien ce dont je suis certain que vous n'allez pas échapper je
+
+836
+01:42:00,960 --> 01:42:06,100
+vous le dis que vous préparez à l'avance ok donc c'est à plus des questions moi je vais vous
+
+837
+01:42:06,100 --> 01:42:11,600
+laisser donc on va se trouver la semaine prochaine pour la dernière séance de cours mais si je vous
+
+838
+01:42:11,600 --> 01:42:12,500
+souhaite une bonne soirée
+
+839
+01:42:12,500 --> 01:42:19,780
+dans une soirée
+
