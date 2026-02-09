@@ -6,4 +6,6 @@ services:
       - ./models:/root/.cache/whisper
       - ./audio-files:/app/audio-files
       - ./output:/app/output
+    env_file:
+      - .env
     command: /app/process_audio.sh

@@ -7,3 +7,6 @@
 !/models/.gitkeep
 !/audio-files/.gitkeep
 !/output/.gitkeep
+
+# Env
+.env

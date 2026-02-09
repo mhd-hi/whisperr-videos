@@ -8,6 +8,12 @@ Transcribe audio files (.m4a) to SRT format using OpenAI Whisper locally in Dock
 - Docker installed
 - For GPU: NVIDIA GPU with Docker Desktop (tested on NVIDIA RTX 4070)
 
+## Configuration
+
+Copy `.env.example` to `.env` and modify the variables as needed:
+
+- `MODEL`: Whisper model to use (default: `large-v3-turbo`)
+
 ## Usage
 
 1. Place .m4a or .mp4 files in `audio-files/` directory.
