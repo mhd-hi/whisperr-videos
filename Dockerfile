@@ -4,16 +4,18 @@ FROM nvcr.io/nvidia/cuda:12.4.0-runtime-ubuntu22.04
 # Update the system and install required dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     sudo \
-    python3.9 \
-    python3-distutils \
     python3-pip \
+    python3-setuptools \
     ffmpeg
 
 # Upgrade pip
 RUN pip install --upgrade pip
 
-# Install openai-whisper
-RUN --mount=type=cache,target=/root/.cache/pip pip install openai-whisper==20240930
+# Install setuptools
+RUN pip install setuptools
+
+# Install Whisper
+RUN pip install --no-build-isolation openai-whisper==20240930
 
 # Set the working directory inside the container
 WORKDIR /app

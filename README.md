@@ -1,12 +1,12 @@
 # Whisper Videos
 > Original repo: https://github.com/manzolo/openai-whisper-docker
 
-Transcribe audio files (.m4a) to SRT format using OpenAI Whisper locally in Docker.
+Transcribe audio files to SRT format using OpenAI Whisper locally in Docker.
 
 ## Prerequisites
 
 - Docker installed
-- For GPU: NVIDIA GPU with Docker Desktop (tested on NVIDIA RTX 4070)
+- To use GPU: NVIDIA GPU with Docker Desktop (tested on NVIDIA RTX 4070)
 
 ## Configuration
 
@@ -16,7 +16,7 @@ Copy `.env.example` to `.env` and modify the variables as needed:
 
 ## Usage
 
-1. Place .m4a or .mp4 files in `audio-files/` directory.
+1. Place your audio files in `audio-files/` directory.
 2. Run transcription:
 
    **First time or after Dockerfile changes:**
