@@ -1,5 +1,4 @@
 # Whisper Videos
-> Original repo: https://github.com/manzolo/openai-whisper-docker
 
 Transcribe audio files to SRT format using OpenAI Whisper locally in Docker.
 
@@ -33,5 +32,5 @@ Copy `.env.example` to `.env` and modify the variables as needed:
 
 ## Model
 
-Uses `large-v3-turbo` model (cached in `models/`).
+Uses `large-v3-turbo` model by default (cached in `models/`).
 

@@ -31,7 +31,8 @@ find "$AUDIO_DIR" -type f -regextype posix-extended -regex ".*\.($ext_regex)$" -
 while IFS= read -r -d '' audio_file; do
     if [ -f "$audio_file" ]; then
         filename=$(basename "$audio_file")
-        echo "Processing: $filename"
+        NOW=$(date +"%Y-%m-%d %H:%M")
+        echo "[$NOW] Processing: $filename"
 
         # Calculate relative path from AUDIO_DIR
         relative_path=$(realpath --relative-to="$AUDIO_DIR" "$audio_file")
